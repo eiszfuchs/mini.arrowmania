@@ -20,6 +20,11 @@ package de.eiszfuchs.game.arrowmania {
 			this.removeEventListener(Event.ADDED_TO_STAGE, init);
 			// entry point
 
+			this.graphics.clear();
+			this.graphics.beginFill(0xff2277);
+			this.graphics.drawRect(0, 0, 150, 420);
+			this.graphics.endFill();
+
 			this.addEventListener(Event.ENTER_FRAME, this.update);
 			this.stage.addEventListener(KeyboardEvent.KEY_DOWN, this.react);
 		}
@@ -28,7 +33,7 @@ package de.eiszfuchs.game.arrowmania {
 		private function update(event:Event = null):void {
 			if (tick === 1) {
 				var dir:int = this.randomDirection();
-				this.emit(dir, dir, dir, RED, false);
+				this.emit(dir, dir, dir, WHITE, false);
 			}
 
 			tick += 1;
@@ -59,7 +64,7 @@ package de.eiszfuchs.game.arrowmania {
 			arrow = this.arrows[0];
 			if (arrow.getDirection() === key) {
 				arrow = this.arrows.shift();
-				this.removeChild(arrow);
+				arrow.kill();
 			}
 		}
 
@@ -72,6 +77,7 @@ package de.eiszfuchs.game.arrowmania {
 		public static const DOWN:int = 2;
 		public static const LEFT:int = 3;
 
+		public static const WHITE:uint = 0xffffff;
 		public static const RED:uint = 0xff0000;
 		public static const GREEN:uint = 0x00ff00;
 		public static const BLUE:uint = 0x0000ff;
@@ -89,7 +95,7 @@ package de.eiszfuchs.game.arrowmania {
 		private function emit(position:int, direction:int, target:int, color:uint, flashing:Boolean):Arrow {
 			var arrow:Arrow = new Arrow(position, direction, target, color, flashing);
 				
-			arrow.y = this.stage.stageHeight;
+			arrow.y = this.stage.stageHeight + 10;
 			this.addChild(arrow);
 
 			this.arrows.push(arrow);

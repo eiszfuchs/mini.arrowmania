@@ -11,7 +11,7 @@
   <default-background-color>#F2F2F2</default-background-color>
   <default-frame-rate>60</default-frame-rate>
   <default-size>
-    <width>720</width>
-    <height>416</height>
+    <width>150</width>
+    <height>420</height>
   </default-size>
 </flex-config>

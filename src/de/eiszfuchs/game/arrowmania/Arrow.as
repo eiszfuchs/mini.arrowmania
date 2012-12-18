@@ -68,5 +68,11 @@ package de.eiszfuchs.game.arrowmania {
 		public function getDirection():int {
 			return this.direction;
 		}
+
+		public function kill():void {
+			if (this.parent) {
+				this.parent.removeChild(this);
+			}
+		}
 	}
 }
