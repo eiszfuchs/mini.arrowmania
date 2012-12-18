@@ -19,7 +19,26 @@ package de.eiszfuchs.game.arrowmania {
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			// entry point
 
-			this.addChild(this.emit(UP, UP, UP, RED, false));	
+			addEventListener(Event.ENTER_FRAME, this.update);
+		}
+
+		private var tick:int = 1;
+		private function update(event:Event = null):void {
+			if (tick === 1) {
+				var dir:int = this.randomDirection();
+				var arrow:Arrow = this.emit(dir, dir, dir, RED, false);	
+				arrow.y = this.stage.stageHeight;
+				this.addChild(arrow);
+			}
+
+			tick += 1;
+			if (tick > 60) {
+				tick = 1;
+			}
+		}
+
+		private function randomDirection():int {
+			return Math.floor(Math.random() * 4);
 		}
 
 		public static const UP:int = 0;

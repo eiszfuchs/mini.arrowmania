@@ -2,6 +2,8 @@ package de.eiszfuchs.game.arrowmania {
 	
 	import flash.display.Sprite;
 	import flash.display.Graphics;
+
+	import flash.events.Event;
 	
 	/**
 	 * @author eiszfuchs
@@ -21,7 +23,11 @@ package de.eiszfuchs.game.arrowmania {
 			this.color = color;
 			this.flashing = flashing;
 
+			this.x = (position + 1) * 30;
+
 			this.draw();
+
+			this.addEventListener(Event.ENTER_FRAME, this.update);
 		}
 
 		private function draw():void {
@@ -30,12 +36,33 @@ package de.eiszfuchs.game.arrowmania {
 			g.clear();
 
 			g.beginFill(this.color);
-			if (this.direction === Main.UP) {
-				g.moveTo(0, -10);
-				g.lineTo(-10, 10);
-				g.lineTo(10, 10);
+			switch (this.direction) {
+				case Main.UP:
+					g.moveTo(0, -10);
+					g.lineTo(-10, 10);
+					g.lineTo(10, 10);
+					break;
+				case Main.DOWN:
+					g.moveTo(0, 10);
+					g.lineTo(-10, -10);
+					g.lineTo(10, -10);
+					break;
+				case Main.LEFT:
+					g.moveTo(-10, 0);
+					g.lineTo(10, 10);
+					g.lineTo(10, -10);
+					break;
+				case Main.RIGHT:
+					g.moveTo(10, 0);
+					g.lineTo(-10, 10);
+					g.lineTo(-10, -10);
+					break;
 			}
 			g.endFill();
+		}
+
+		private function update(event:Event = null):void {
+			this.y -= 1;
 		}
 	}
 }
