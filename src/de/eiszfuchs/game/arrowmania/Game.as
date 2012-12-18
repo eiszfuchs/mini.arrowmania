@@ -22,6 +22,7 @@ package de.eiszfuchs.game.arrowmania {
 		
 		private var tick:int;
 		private var tickStep:int;
+		private var tickLengthMin:int;
 		private var tickLengthBase:int;
 		private var tickLength:int;
 		private var tickDecrease:int;
@@ -56,14 +57,15 @@ package de.eiszfuchs.game.arrowmania {
 
 			this.tick = 1;
 			this.tickLengthBase = 60;
+			this.tickLengthMin = 5;
 			this.tickLength = this.tickLengthBase;
 			this.tickStep = 1;
 			this.tickDecrease = 10;
 
 			this.speedBase = 1;
 			this.speed = this.speedBase;
-			this.speedStep = 0.5;
-			this.speedIncrease = 50;
+			this.speedStep = 0.1;
+			this.speedIncrease = 30;
 
 			this.mockPosition = false;
 			this.mockDirection = false;
@@ -107,10 +109,13 @@ package de.eiszfuchs.game.arrowmania {
 				this.arrows[i].y -= this.speed;
 			}
 
-			if (this.emitCount > 0) {
-				this.tickLength = this.tickLengthBase - this.tickStep * Math.floor(this.emitCount / this.tickDecrease);
-				this.speed = this.speedBase + this.speedStep * Math.floor(this.emitCount / this.speedIncrease);
-			}
+			this.tickLength = this.tickLengthBase - this.tickStep * Math.floor(this.emitCount / this.tickDecrease);
+			this.tickLength = Math.max(this.tickLength, this.tickLengthMin);
+			this.speed = this.speedBase + this.speedStep * Math.floor(this.emitCount / this.speedIncrease);
+
+			// clean up numbers
+			this.tickLength = Math.round(this.tickLength * 100) / 100;
+			this.speed = Math.round(this.speed * 100) / 100;
 
 			tick += 1;
 			if (tick > this.tickLength) {
@@ -157,8 +162,6 @@ package de.eiszfuchs.game.arrowmania {
 			} else {
 				this.die();
 			}
-
-			this.update();
 		}
 
 		private function randomDirection():int {

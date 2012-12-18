@@ -41,5 +41,13 @@ package de.eiszfuchs.game.arrowmania {
 
 			this.addChild(new Game);
 		}
+
+		/*
+
+		TODO
+
+		- store high score
+
+		*/
 	}
 }
