@@ -17,7 +17,30 @@ package de.eiszfuchs.game.arrowmania {
 		
 		private function init(e:Event = null):void {
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-			// entry point			
+			// entry point
+
+			this.addChild(this.emit(UP, UP, UP, RED, false));	
+		}
+
+		public static const UP:int = 0;
+		public static const RIGHT:int = 1;
+		public static const DOWN:int = 2;
+		public static const LEFT:int = 3;
+
+		public static const RED:uint = 0xff0000;
+		public static const GREEN:uint = 0x00ff00;
+		public static const BLUE:uint = 0x0000ff;
+		public static const YELLOW:uint = 0xffff00;
+
+		/**
+		 * position
+		 * direction
+		 * target
+		 * color
+		 * flashing
+		 */
+		private function emit(position:int, direction:int, target:int, color:uint, flashing:Boolean):Arrow {
+			return new Arrow(position, direction, target, color, flashing);
 		}
 	}
 }
