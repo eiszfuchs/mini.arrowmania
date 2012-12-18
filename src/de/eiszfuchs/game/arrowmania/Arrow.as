@@ -34,33 +34,28 @@ package de.eiszfuchs.game.arrowmania {
 			g.clear();
 
 			g.beginFill(this.color);
+			g.moveTo(0, -10);
+			g.lineTo(-10, 10);
+			g.lineTo(10, 10);
+			g.endFill();
 			switch (this.direction) {
 				case Game.UP:
-					g.moveTo(0, -10);
-					g.lineTo(-10, 10);
-					g.lineTo(10, 10);
+					this.rotation = 0;
 					break;
 				case Game.DOWN:
-					g.moveTo(0, 10);
-					g.lineTo(-10, -10);
-					g.lineTo(10, -10);
+					this.rotation = 180;
 					break;
 				case Game.LEFT:
-					g.moveTo(-10, 0);
-					g.lineTo(10, 10);
-					g.lineTo(10, -10);
+					this.rotation = 270;
 					break;
 				case Game.RIGHT:
-					g.moveTo(10, 0);
-					g.lineTo(-10, 10);
-					g.lineTo(-10, -10);
+					this.rotation = 90;
 					break;
 			}
-			g.endFill();
 		}
 
 		public function getDirection():int {
-			return this.direction;
+			return this.target; // yes!
 		}
 
 		public function kill():void {
