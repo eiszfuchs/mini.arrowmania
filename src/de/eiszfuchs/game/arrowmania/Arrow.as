@@ -26,8 +26,6 @@ package de.eiszfuchs.game.arrowmania {
 			this.x = (position + 1) * 30;
 
 			this.draw();
-
-			this.addEventListener(Event.ENTER_FRAME, this.update);
 		}
 
 		private function draw():void {
@@ -37,32 +35,28 @@ package de.eiszfuchs.game.arrowmania {
 
 			g.beginFill(this.color);
 			switch (this.direction) {
-				case Main.UP:
+				case Game.UP:
 					g.moveTo(0, -10);
 					g.lineTo(-10, 10);
 					g.lineTo(10, 10);
 					break;
-				case Main.DOWN:
+				case Game.DOWN:
 					g.moveTo(0, 10);
 					g.lineTo(-10, -10);
 					g.lineTo(10, -10);
 					break;
-				case Main.LEFT:
+				case Game.LEFT:
 					g.moveTo(-10, 0);
 					g.lineTo(10, 10);
 					g.lineTo(10, -10);
 					break;
-				case Main.RIGHT:
+				case Game.RIGHT:
 					g.moveTo(10, 0);
 					g.lineTo(-10, 10);
 					g.lineTo(-10, -10);
 					break;
 			}
 			g.endFill();
-		}
-
-		private function update(event:Event = null):void {
-			this.y -= 1;
 		}
 
 		public function getDirection():int {
