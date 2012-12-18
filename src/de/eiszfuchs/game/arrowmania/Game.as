@@ -26,7 +26,8 @@ package de.eiszfuchs.game.arrowmania {
 		private var tickLength:int;
 		private var tickDecrease:int;
 
-		private var speed:int;
+		private var speed:Number;
+		private var speedBase:Number;
 		private var speedStep:Number;
 		private var speedIncrease:int;
 
@@ -59,9 +60,10 @@ package de.eiszfuchs.game.arrowmania {
 			this.tickStep = 1;
 			this.tickDecrease = 10;
 
-			this.speed = 1;
+			this.speedBase = 1;
+			this.speed = this.speedBase;
 			this.speedStep = 0.5;
-			this.speedIncrease = 100;
+			this.speedIncrease = 50;
 
 			this.mockPosition = false;
 			this.mockDirection = false;
@@ -107,6 +109,7 @@ package de.eiszfuchs.game.arrowmania {
 
 			if (this.emitCount > 0) {
 				this.tickLength = this.tickLengthBase - this.tickStep * Math.floor(this.emitCount / this.tickDecrease);
+				this.speed = this.speedBase + this.speedStep * Math.floor(this.emitCount / this.speedIncrease);
 			}
 
 			tick += 1;
@@ -118,7 +121,7 @@ package de.eiszfuchs.game.arrowmania {
 				this.mocking = true;
 			}
 
-			scoreField.text = this.points.toString(10);
+			scoreField.text = this.points.toString(10) + "\n" + this.emitCount.toString(10) + "\n" + this.speed.toString(10) + "\n" + this.tickLength.toString(10);
 		}
 
 		private function react(event:KeyboardEvent = null):void {
@@ -146,6 +149,11 @@ package de.eiszfuchs.game.arrowmania {
 				arrow.kill();
 
 				this.points += 1;
+
+				if (this.arrows.length < 1) {
+					// livin' on the edge!
+					// this.tick = 1;
+				}
 			} else {
 				this.die();
 			}
