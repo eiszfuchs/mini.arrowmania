@@ -64,5 +64,9 @@ package de.eiszfuchs.game.arrowmania {
 		private function update(event:Event = null):void {
 			this.y -= 1;
 		}
+
+		public function getDirection():int {
+			return this.direction;
+		}
 	}
 }

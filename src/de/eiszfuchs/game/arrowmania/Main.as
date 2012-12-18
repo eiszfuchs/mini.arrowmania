@@ -1,7 +1,8 @@
 package de.eiszfuchs.game.arrowmania {
 	
 	import flash.display.Sprite;
-	import flash.events.Event;
+	import flash.events.*;
+	import flash.ui.Keyboard;
 	
 	/**
 	 * @author eiszfuchs
@@ -10,30 +11,55 @@ package de.eiszfuchs.game.arrowmania {
 		
 		public function Main():void {
 			if (stage)
-				init();
+				this.init();
 			else
-				addEventListener(Event.ADDED_TO_STAGE, init);
+				this.addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
 		private function init(e:Event = null):void {
-			removeEventListener(Event.ADDED_TO_STAGE, init);
+			this.removeEventListener(Event.ADDED_TO_STAGE, init);
 			// entry point
 
-			addEventListener(Event.ENTER_FRAME, this.update);
+			this.addEventListener(Event.ENTER_FRAME, this.update);
+			this.stage.addEventListener(KeyboardEvent.KEY_DOWN, this.react);
 		}
 
 		private var tick:int = 1;
 		private function update(event:Event = null):void {
 			if (tick === 1) {
 				var dir:int = this.randomDirection();
-				var arrow:Arrow = this.emit(dir, dir, dir, RED, false);	
-				arrow.y = this.stage.stageHeight;
-				this.addChild(arrow);
+				this.emit(dir, dir, dir, RED, false);
 			}
 
 			tick += 1;
 			if (tick > 60) {
 				tick = 1;
+			}
+		}
+
+		private function react(event:KeyboardEvent = null):void {
+			var key:uint = event.keyCode;
+
+			switch (key) {
+				case Keyboard.UP:
+					key = UP;
+					break;
+				case Keyboard.RIGHT:
+					key = RIGHT;
+					break;
+				case Keyboard.DOWN:
+					key = DOWN;
+					break;
+				case Keyboard.LEFT:
+					key = LEFT;
+					break;
+			}
+
+			var arrow:Arrow;
+			arrow = this.arrows[0];
+			if (arrow.getDirection() === key) {
+				arrow = this.arrows.shift();
+				this.removeChild(arrow);
 			}
 		}
 
@@ -51,15 +77,24 @@ package de.eiszfuchs.game.arrowmania {
 		public static const BLUE:uint = 0x0000ff;
 		public static const YELLOW:uint = 0xffff00;
 
+		private var arrows:Array = new Array;
+
 		/**
-		 * position
-		 * direction
-		 * target
-		 * color
-		 * flashing
+		 * position  - slot  
+		 * direction - arrow direction
+		 * target    - which button needs to be pressed
+		 * color     - color
+		 * flashing  - flashes?
 		 */
 		private function emit(position:int, direction:int, target:int, color:uint, flashing:Boolean):Arrow {
-			return new Arrow(position, direction, target, color, flashing);
+			var arrow:Arrow = new Arrow(position, direction, target, color, flashing);
+				
+			arrow.y = this.stage.stageHeight;
+			this.addChild(arrow);
+
+			this.arrows.push(arrow);
+
+			return arrow;
 		}
 	}
 }
