@@ -28,16 +28,22 @@ package de.eiszfuchs.game.arrowmania {
 			this.draw();
 		}
 
+		private function shape(g:Graphics):void {
+			g.moveTo(0, -10);
+			g.lineTo(-10, 10);
+			g.lineTo(0, 5);
+			g.lineTo(10, 10);
+			g.lineTo(0, -10);
+		}
+
 		private function draw():void {
 			var g:Graphics = this.graphics;
 
 			g.clear();
-
 			g.beginFill(this.color);
-			g.moveTo(0, -10);
-			g.lineTo(-10, 10);
-			g.lineTo(10, 10);
+			this.shape(g);
 			g.endFill();
+
 			switch (this.direction) {
 				case Game.UP:
 					this.rotation = 0;
@@ -61,10 +67,7 @@ package de.eiszfuchs.game.arrowmania {
 				var g:Graphics = this.graphics;
 
 				g.lineStyle(0, 0x000000, Math.abs(tick / (tickLength / 2) - 1), true);
-				g.moveTo(0, -10);
-				g.lineTo(-10, 10);
-				g.lineTo(10, 10);
-				g.lineTo(0, -10);
+				this.shape(g);
 			}
 		}
 
