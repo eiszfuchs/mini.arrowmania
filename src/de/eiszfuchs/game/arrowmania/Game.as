@@ -87,12 +87,13 @@ package de.eiszfuchs.game.arrowmania {
 		private var scoreField:TextField;
 		private function build():void {
 			scoreFormat = new TextFormat;
-			scoreFormat.font = "Helvetica";
+			scoreFormat.font = "Arial";
 			scoreFormat.size = 16;
+			scoreFormat.bold = true;
 			scoreField = new TextField;
 			scoreField.type = TextFieldType.DYNAMIC;
 			scoreField.textColor = RED;
-			scoreField.embedFonts = false;
+			scoreField.embedFonts = false; // TODO: true
 			scoreField.mouseEnabled = false;
 			scoreField.selectable = false;
 			scoreField.autoSize = TextFieldAutoSize.LEFT;
@@ -230,10 +231,12 @@ package de.eiszfuchs.game.arrowmania {
 			this.removeEventListener(Event.ENTER_FRAME, this.update);
 			Main.master.stage.removeEventListener(KeyboardEvent.KEY_DOWN, this.react);
 
-			scoreFormat.size = 48;
+			scoreFormat.size = 56;
 			scoreField.text = this.points.toString(10);
 			scoreField.setTextFormat(scoreFormat);
 			scoreField.x = 10;
+
+			// this.rotation = 5;
 
 			this.addEventListener(Event.ENTER_FRAME, this.noise);
 
