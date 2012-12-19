@@ -54,6 +54,20 @@ package de.eiszfuchs.game.arrowmania {
 			}
 		}
 
+		public function update(tick:int, tickLength:int):void {
+			this.draw();
+
+			if (this.flashing) {
+				var g:Graphics = this.graphics;
+
+				g.lineStyle(0, 0x000000, Math.abs(tick / (tickLength / 2) - 1), true);
+				g.moveTo(0, -10);
+				g.lineTo(-10, 10);
+				g.lineTo(10, 10);
+				g.lineTo(0, -10);
+			}
+		}
+
 		public function getDirection():int {
 			return this.target; // yes!
 		}

@@ -35,7 +35,7 @@ package de.eiszfuchs.game.arrowmania {
 			Main.master = this;
 
 			this.graphics.clear();
-			this.graphics.beginFill(0xff2277);
+			this.graphics.beginFill(Game.WHITE);
 			this.graphics.drawRect(0, 0, 150, 420);
 			this.graphics.endFill();
 

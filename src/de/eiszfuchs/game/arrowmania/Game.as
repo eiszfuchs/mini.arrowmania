@@ -4,6 +4,8 @@ package de.eiszfuchs.game.arrowmania {
 	import flash.events.*;
 	import flash.ui.Keyboard;
 	
+	import flash.filters.*;
+
 	import flash.text.TextField;
 	import flash.text.TextFieldType;
 	import flash.text.TextFieldAutoSize;
@@ -47,10 +49,10 @@ package de.eiszfuchs.game.arrowmania {
 		public static const LEFT:int = 2;
 
 		public static const WHITE:uint = 0xffffff;
-		public static const RED:uint = 0xff0000;
-		public static const GREEN:uint = 0x00ff00;
-		public static const BLUE:uint = 0x0000ff;
-		public static const YELLOW:uint = 0xffff00;
+		public static const RED:uint = 0xff2277;
+		public static const GREEN:uint = 0x81db50;
+		public static const BLUE:uint = 0x2c5cf7;
+		public static const YELLOW:uint = 0xe6e668;
 		
 		private function init(e:Event = null):void {
 			build();
@@ -76,6 +78,7 @@ package de.eiszfuchs.game.arrowmania {
 			this.arrows = new Array;
 			this.emitCount = this.arrows.length;
 
+			this.addEventListener(Event.ENTER_FRAME, this.updateTick);
 			this.addEventListener(Event.ENTER_FRAME, this.update);
 			Main.master.stage.addEventListener(KeyboardEvent.KEY_DOWN, this.react);
 		}
@@ -85,10 +88,10 @@ package de.eiszfuchs.game.arrowmania {
 		private function build():void {
 			scoreFormat = new TextFormat;
 			scoreFormat.font = "Helvetica";
-			scoreFormat.size = 20;
+			scoreFormat.size = 16;
 			scoreField = new TextField;
 			scoreField.type = TextFieldType.DYNAMIC;
-			scoreField.textColor = 0xffffff;
+			scoreField.textColor = RED;
 			scoreField.embedFonts = false;
 			scoreField.mouseEnabled = false;
 			scoreField.selectable = false;
@@ -99,14 +102,22 @@ package de.eiszfuchs.game.arrowmania {
 			addChild(scoreField);
 		}
 
+		private function updateTick(event:Event = null):void {
+			tick += 1;
+			if (tick > this.tickLength) {
+				tick = 1;
+			}
+		}
+
 		private function update(event:Event = null):void {
 			if (tick === 1) {
 				var dir:int = this.randomDirection();
-				this.emit(dir, dir, dir, WHITE, false);
+				this.emit(dir, dir, dir, this.randomColor(), true);
 			}
 
 			for (var i:int = 0; i < this.arrows.length; i += 1) {
 				this.arrows[i].y -= this.speed;
+				this.arrows[i].update(this.tick, this.tickLength);
 			}
 
 			this.tickLength = this.tickLengthBase - this.tickStep * Math.floor(this.emitCount / this.tickDecrease);
@@ -117,16 +128,15 @@ package de.eiszfuchs.game.arrowmania {
 			this.tickLength = Math.round(this.tickLength * 100) / 100;
 			this.speed = Math.round(this.speed * 100) / 100;
 
-			tick += 1;
-			if (tick > this.tickLength) {
-				tick = 1;
-			}
-
 			if (this.emitCount >= this.mockStart) {
 				this.mocking = true;
 			}
 
-			scoreField.text = this.points.toString(10) + "\n" + this.emitCount.toString(10) + "\n" + this.speed.toString(10) + "\n" + this.tickLength.toString(10);
+			scoreField.text = this.points.toString(10)
+				+ "\n" + this.emitCount.toString(10)
+				+ "\n" + this.speed.toString(10)
+				+ "\n" + this.tick.toString(10)
+				+ "\n" + this.tickLength.toString(10);
 		}
 
 		private function react(event:KeyboardEvent = null):void {
@@ -164,8 +174,18 @@ package de.eiszfuchs.game.arrowmania {
 			}
 		}
 
-		private function randomDirection():int {
+		private function randomIndex():int {
 			return Math.floor(Math.random() * 4);
+		}
+
+		private function randomDirection():int {
+			var directions:Array = [UP, DOWN, LEFT, RIGHT];
+			return directions[this.randomIndex()];
+		}
+
+		private function randomColor():int {
+			var colors:Array = [RED, BLUE, GREEN, YELLOW];
+			return colors[this.randomIndex()];
 		}
 
 		/**
@@ -188,9 +208,34 @@ package de.eiszfuchs.game.arrowmania {
 			return arrow;
 		}
 
+		private function noise(event:Event = null):void {
+			if (Math.random() > 0.9) {
+				this.x = Math.random() * 10 - 5;
+			} else {
+				this.x = 0;
+			}
+
+			if (Math.random() > 0.95) {
+				this.y = Math.random() * 20 - 10;
+			} else {
+				this.y = 0;
+			}
+
+			this.filters = [
+				new BlurFilter(Math.random() * 10, 0, 2)
+			];
+		}
+
 		private function die():void {
 			this.removeEventListener(Event.ENTER_FRAME, this.update);
 			Main.master.stage.removeEventListener(KeyboardEvent.KEY_DOWN, this.react);
+
+			scoreFormat.size = 48;
+			scoreField.text = this.points.toString(10);
+			scoreField.setTextFormat(scoreFormat);
+			scoreField.x = 10;
+
+			this.addEventListener(Event.ENTER_FRAME, this.noise);
 
 			// end of game
 		}
