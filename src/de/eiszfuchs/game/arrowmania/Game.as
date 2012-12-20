@@ -38,11 +38,6 @@ package de.eiszfuchs.game.arrowmania {
 		private var speedStep:Number;
 		private var speedIncrease:int;
 
-		private var mocking:Boolean;
-		private var mockStart:int;
-		private var mockPosition:Boolean;
-		private var mockDirection:Boolean;
-
 		private var mode:Mode;
 
 		public function Game(mode:Mode):void {
@@ -77,11 +72,6 @@ package de.eiszfuchs.game.arrowmania {
 			this.speed = this.speedBase;
 			this.speedStep = this.mode.speedStep;
 			this.speedIncrease = this.mode.speedIncrease;
-
-			this.mockPosition = this.mode.mockPosition;
-			this.mockDirection = this.mode.mockDirection;
-			this.mocking = false;
-			this.mockStart = this.mode.mockStart;
 
 			this.points = 0;
 			this.arrows = new Array;
@@ -153,10 +143,6 @@ package de.eiszfuchs.game.arrowmania {
 			this.tickLength = Math.round(this.tickLength * 100) / 100;
 			this.speed = Math.round(this.speed * 100) / 100;
 
-			if (this.emitCount >= this.mockStart) {
-				this.mocking = true;
-			}
-
 			scoreField.text = this.points.toString(10)
 				+ "\n" + this.emitCount.toString(10)
 				+ "\n" + this.speed.toString(10)
@@ -212,7 +198,7 @@ package de.eiszfuchs.game.arrowmania {
 		 * flashing  - flashes?
 		 */
 		private function emit():Arrow {
-			var arrow:Arrow = this.mode.emit();
+			var arrow:Arrow = this.mode.emit(this.emitCount);
 
 			arrow.y = this.stage.stageHeight - 30;
 			this.addChild(arrow);

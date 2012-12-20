@@ -30,7 +30,7 @@ package de.eiszfuchs.game.arrowmania.mode {
 			mockDirection = false;
 		}
 
-		public function emit():Arrow {
+		public function emit(index:int = 0):Arrow {
 			var index:int = this.randomIndex();
 			var direction:int = this.getDirection(index);
 			var color:uint = this.getColor(index);
