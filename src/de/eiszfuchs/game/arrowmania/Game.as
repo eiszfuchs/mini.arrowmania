@@ -11,6 +11,8 @@ package de.eiszfuchs.game.arrowmania {
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	import flash.text.AntiAliasType;
+
+	import de.eiszfuchs.game.arrowmania.mode.*;
 	
 	/**
 	 * @author eiszfuchs
@@ -39,8 +41,8 @@ package de.eiszfuchs.game.arrowmania {
 		private var mockPosition:Boolean;
 		private var mockDirection:Boolean;
 
-		public function Game():void {
-			this.init();
+		public function Game(mode:Mode):void {
+			this.init(mode);
 		}
 
 		public static const UP:int = 0;
@@ -54,25 +56,25 @@ package de.eiszfuchs.game.arrowmania {
 		public static const BLUE:uint = 0x2c5cf7;
 		public static const YELLOW:uint = 0xe6e668;
 		
-		private function init(e:Event = null):void {
+		private function init(mode:Mode):void {
 			build();
 
 			this.tick = 1;
-			this.tickLengthBase = 60;
+			this.tickLengthBase = mode.tickLength;
 			this.tickLengthMin = 5;
 			this.tickLength = this.tickLengthBase;
 			this.tickStep = 1;
-			this.tickDecrease = 10;
+			this.tickDecrease = mode.tickDecrease;
 
-			this.speedBase = 1;
+			this.speedBase = mode.speed;
 			this.speed = this.speedBase;
-			this.speedStep = 0.1;
-			this.speedIncrease = 30;
+			this.speedStep = mode.speedStep;
+			this.speedIncrease = mode.speedIncrease;
 
-			this.mockPosition = false;
-			this.mockDirection = false;
+			this.mockPosition = mode.mockPosition;
+			this.mockDirection = mode.mockDirection;
 			this.mocking = false;
-			this.mockStart = 100;
+			this.mockStart = mode.mockStart;
 
 			this.points = 0;
 			this.arrows = new Array;
