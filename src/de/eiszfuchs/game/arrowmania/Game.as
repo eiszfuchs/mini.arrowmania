@@ -1,6 +1,7 @@
 package de.eiszfuchs.game.arrowmania {
 	
 	import flash.display.Sprite;
+	import flash.display.Graphics;
 	import flash.events.*;
 	import flash.ui.Keyboard;
 	
@@ -107,6 +108,16 @@ package de.eiszfuchs.game.arrowmania {
 			scoreField.text = "0";
 
 			addChild(scoreField);
+
+			// slot arrows
+			var g:Graphics = this.graphics;
+			g.clear();
+
+			for (var i:int = 0; i < 4; i += 1) {
+				g.beginFill(0x000000);
+				Arrow.shape(g, (i + 1) * 30, 390);
+				g.endFill();
+			}
 		}
 
 		private function updateTick(event:Event = null):void {
