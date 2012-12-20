@@ -1,5 +1,5 @@
 package de.eiszfuchs.game.arrowmania.mode {
-	
+
 	import de.eiszfuchs.game.arrowmania.Game;
 	import de.eiszfuchs.game.arrowmania.Arrow;
 
@@ -7,7 +7,7 @@ package de.eiszfuchs.game.arrowmania.mode {
 	 * @author eiszfuchs
 	 */
 	public class Mode {
-		
+
 		public var tickLength:int;
 		public var tickDecrease:int;
 
@@ -23,16 +23,17 @@ package de.eiszfuchs.game.arrowmania.mode {
 			tickLength = 60;
 			tickDecrease = 10;
 			speed = 1;
-			speedStep = 0.1;
-			speedIncrease = 30;
+			speedStep = 0.05;
+			speedIncrease = 15;
 			mockStart = 100;
 			mockPosition = false;
 			mockDirection = false;
 		}
 
 		public function emit():Arrow {
-			var direction:int = this.randomDirection();
-			var color:uint = this.randomColor();
+			var index:int = this.randomIndex();
+			var direction:int = this.getDirection(index);
+			var color:uint = this.getColor(index);
 			return new Arrow(direction, direction, direction, color, true);
 		}
 

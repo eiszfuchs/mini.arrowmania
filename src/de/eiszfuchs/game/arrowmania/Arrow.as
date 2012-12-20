@@ -1,16 +1,16 @@
 package de.eiszfuchs.game.arrowmania {
-	
+
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.display.Graphics;
 
 	import flash.events.Event;
-	
+
 	/**
 	 * @author eiszfuchs
 	 */
 	public class Arrow extends Sprite {
-		
+
 		private var position:int;
 		private var direction:int;
 		private var target:int;

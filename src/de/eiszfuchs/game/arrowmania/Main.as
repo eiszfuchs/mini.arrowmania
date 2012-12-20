@@ -1,14 +1,14 @@
 package de.eiszfuchs.game.arrowmania {
-	
+
 	import flash.display.Sprite;
 	import flash.events.*;
 	import flash.ui.Keyboard;
-	
+
 	/**
 	 * @author eiszfuchs
 	 */
 	public class Main extends Sprite {
-		
+
 		public static var master:Main;
 
 		public function Main():void {
@@ -17,7 +17,7 @@ package de.eiszfuchs.game.arrowmania {
 			else
 				this.addEventListener(Event.ADDED_TO_STAGE, init);
 		}
-		
+
 		// possible arrows as of arrow mania II:
 		// (! = opposite)
 		// - direction = key
@@ -46,7 +46,6 @@ package de.eiszfuchs.game.arrowmania {
 
 		TODO
 
-		- restart game
 		- store high score
 
 		*/

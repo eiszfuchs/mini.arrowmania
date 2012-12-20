@@ -1,9 +1,9 @@
 package de.eiszfuchs.game.arrowmania {
-	
+
 	import flash.display.Sprite;
 
 	import de.eiszfuchs.game.arrowmania.mode.*;
-	
+
 	/**
 	 * @author eiszfuchs
 	 */

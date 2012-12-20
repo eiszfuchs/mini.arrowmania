@@ -1,11 +1,11 @@
 package de.eiszfuchs.game.arrowmania {
-	
+
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.display.Graphics;
 	import flash.events.*;
 	import flash.ui.Keyboard;
-	
+
 	import flash.filters.*;
 
 	import flash.text.TextField;
@@ -15,7 +15,7 @@ package de.eiszfuchs.game.arrowmania {
 	import flash.text.AntiAliasType;
 
 	import de.eiszfuchs.game.arrowmania.mode.*;
-	
+
 	/**
 	 * @author eiszfuchs
 	 */
@@ -25,7 +25,7 @@ package de.eiszfuchs.game.arrowmania {
 		private var emitCount:int;
 
 		private var arrows:Array;
-		
+
 		private var tick:int;
 		private var tickStep:int;
 		private var tickLengthMin:int;
@@ -51,17 +51,18 @@ package de.eiszfuchs.game.arrowmania {
 			this.init();
 		}
 
-		public static const UP:int = 0;
+		public static const UP:int = 1;
 		public static const RIGHT:int = 3;
-		public static const DOWN:int = 1;
-		public static const LEFT:int = 2;
+		public static const DOWN:int = 2;
+		public static const LEFT:int = 0;
 
 		public static const WHITE:uint = 0xffffff;
+		public static const SLOT:uint = 0xb5b5b5;
 		public static const RED:uint = 0xff2277;
 		public static const GREEN:uint = 0x81db50;
 		public static const BLUE:uint = 0x2c5cf7;
 		public static const YELLOW:uint = 0xe6e668;
-		
+
 		private function init():void {
 			build();
 
@@ -116,12 +117,12 @@ package de.eiszfuchs.game.arrowmania {
 
 				var g:Graphics = slotShape.graphics;
 				g.clear();
-				g.beginFill(0x000000);
+				g.beginFill(SLOT);
 				Arrow.shape(g);
 				g.endFill();
 
 				slotShape.x = (i + 1) * 30;
-				slotShape.y = 390;
+				slotShape.y = Main.master.stage.stageHeight - 30;
 				Arrow.rotate(slotShape, i);
 				this.addChild(slotShape);
 			}
@@ -204,7 +205,7 @@ package de.eiszfuchs.game.arrowmania {
 		}
 
 		/**
-		 * position  - slot  
+		 * position  - slot
 		 * direction - arrow direction
 		 * target    - which button needs to be pressed
 		 * color     - color
@@ -212,8 +213,8 @@ package de.eiszfuchs.game.arrowmania {
 		 */
 		private function emit():Arrow {
 			var arrow:Arrow = this.mode.emit();
-				
-			arrow.y = this.stage.stageHeight + 10;
+
+			arrow.y = this.stage.stageHeight - 30;
 			this.addChild(arrow);
 
 			this.arrows.push(arrow);
@@ -263,6 +264,7 @@ package de.eiszfuchs.game.arrowmania {
 
 		private function kill():void {
 			Main.master.stage.removeEventListener(KeyboardEvent.KEY_DOWN, this.react);
+			this.removeEventListener(Event.ENTER_FRAME, this.updateTick);
 			this.removeEventListener(Event.ENTER_FRAME, this.noise);
 
 			if (this.parent) {
