@@ -28,12 +28,12 @@ package de.eiszfuchs.game.arrowmania {
 			this.draw();
 		}
 
-		private function shape(g:Graphics):void {
-			g.moveTo(0, -10);
-			g.lineTo(-10, 10);
-			g.lineTo(0, 5);
-			g.lineTo(10, 10);
-			g.lineTo(0, -10);
+		public static function shape(g:Graphics, shiftX:int = 0, shiftY:int = 0):void {
+			g.moveTo(shiftX + 0,   shiftY + -10);
+			g.lineTo(shiftX + -10, shiftY + 10);
+			g.lineTo(shiftX + 0,   shiftY + 5);
+			g.lineTo(shiftX + 10,  shiftY + 10);
+			g.lineTo(shiftX + 0,   shiftY + -10);
 		}
 
 		private function draw():void {
@@ -41,7 +41,7 @@ package de.eiszfuchs.game.arrowmania {
 
 			g.clear();
 			g.beginFill(this.color);
-			this.shape(g);
+			Arrow.shape(g);
 			g.endFill();
 
 			switch (this.direction) {
@@ -67,7 +67,7 @@ package de.eiszfuchs.game.arrowmania {
 				var g:Graphics = this.graphics;
 
 				g.lineStyle(0, 0x000000, Math.abs(tick / (tickLength / 2) - 1), true);
-				this.shape(g);
+				Arrow.shape(g);
 			}
 		}
 
