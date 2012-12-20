@@ -1,5 +1,6 @@
 package de.eiszfuchs.game.arrowmania {
 	
+	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.display.Graphics;
 	import flash.events.*;
@@ -110,13 +111,19 @@ package de.eiszfuchs.game.arrowmania {
 			addChild(scoreField);
 
 			// slot arrows
-			var g:Graphics = this.graphics;
-			g.clear();
-
 			for (var i:int = 0; i < 4; i += 1) {
+				var slotShape:Shape = new Shape;
+
+				var g:Graphics = slotShape.graphics;
+				g.clear();
 				g.beginFill(0x000000);
-				Arrow.shape(g, (i + 1) * 30, 390);
+				Arrow.shape(g);
 				g.endFill();
+
+				slotShape.x = (i + 1) * 30;
+				slotShape.y = 390;
+				Arrow.rotate(slotShape, i);
+				this.addChild(slotShape);
 			}
 		}
 
@@ -181,9 +188,8 @@ package de.eiszfuchs.game.arrowmania {
 			}
 
 			var arrow:Arrow;
-			arrow = this.arrows[0];
+			arrow = this.arrows.shift();
 			if (arrow.getDirection() === key) {
-				arrow = this.arrows.shift();
 				arrow.kill();
 
 				this.points += 1;

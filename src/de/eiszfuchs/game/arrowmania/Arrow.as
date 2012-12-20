@@ -1,5 +1,6 @@
 package de.eiszfuchs.game.arrowmania {
 	
+	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.display.Graphics;
 
@@ -36,6 +37,23 @@ package de.eiszfuchs.game.arrowmania {
 			g.lineTo(shiftX + 0,   shiftY + -10);
 		}
 
+		public static function rotate(d:DisplayObject, direction:int):void {
+			switch (direction) {
+				case Game.UP:
+					d.rotation = 0;
+					break;
+				case Game.RIGHT:
+					d.rotation = 90;
+					break;
+				case Game.DOWN:
+					d.rotation = 180;
+					break;
+				case Game.LEFT:
+					d.rotation = 270;
+					break;
+			}
+		}
+
 		private function draw():void {
 			var g:Graphics = this.graphics;
 
@@ -44,20 +62,7 @@ package de.eiszfuchs.game.arrowmania {
 			Arrow.shape(g);
 			g.endFill();
 
-			switch (this.direction) {
-				case Game.UP:
-					this.rotation = 0;
-					break;
-				case Game.DOWN:
-					this.rotation = 180;
-					break;
-				case Game.LEFT:
-					this.rotation = 270;
-					break;
-				case Game.RIGHT:
-					this.rotation = 90;
-					break;
-			}
+			Arrow.rotate(this, this.direction);
 		}
 
 		public function update(tick:int, tickLength:int):void {
