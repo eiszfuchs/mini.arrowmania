@@ -39,13 +39,14 @@ package de.eiszfuchs.game.arrowmania {
 			this.graphics.drawRect(0, 0, 150, 420);
 			this.graphics.endFill();
 
-			this.addChild(new Game);
+			this.addChild(new Menu);
 		}
 
 		/*
 
 		TODO
 
+		- restart game
 		- store high score
 
 		*/
