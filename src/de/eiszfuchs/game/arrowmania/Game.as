@@ -161,6 +161,12 @@ package de.eiszfuchs.game.arrowmania {
 				case Keyboard.LEFT:
 					key = LEFT;
 					break;
+				case Keyboard.ENTER:
+					this.restart();
+					return;
+				case Keyboard.ESCAPE:
+					this.kill();
+					return;
 			}
 
 			var arrow:Arrow;
@@ -222,8 +228,8 @@ package de.eiszfuchs.game.arrowmania {
 			this.removeEventListener(Event.ENTER_FRAME, this.update);
 
 			scoreFormat.size = 56;
-			scoreField.text = this.points.toString(10);
-			scoreField.setTextFormat(scoreFormat);
+			scoreField.text = this.points.toString(10) + "\n[ENTER]";
+			scoreField.setTextFormat(scoreFormat, 0, this.points.toString(10).length);
 			scoreField.x = 10;
 
 			// this.rotation = 5;
@@ -231,6 +237,11 @@ package de.eiszfuchs.game.arrowmania {
 			this.addEventListener(Event.ENTER_FRAME, this.noise);
 
 			// end of game
+		}
+
+		private function restart():void {
+			this.parent.addChild(new Game(this.mode));
+			this.kill();
 		}
 
 		private function kill():void {

@@ -32,7 +32,7 @@ package de.eiszfuchs.game.arrowmania.mode {
 
 		public function emit():Arrow {
 			var direction:int = this.randomDirection();
-			var color:int = this.randomColor();
+			var color:uint = this.randomColor();
 			return new Arrow(direction, direction, direction, color, true);
 		}
 
@@ -45,7 +45,7 @@ package de.eiszfuchs.game.arrowmania.mode {
 			return directions[index];
 		}
 
-		protected function getColor(index:int):int {
+		protected function getColor(index:int):uint {
 			var colors:Array = [Game.RED, Game.BLUE, Game.GREEN, Game.YELLOW];
 			return colors[index];
 		}
