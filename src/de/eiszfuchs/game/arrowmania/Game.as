@@ -41,8 +41,12 @@ package de.eiszfuchs.game.arrowmania {
 		private var mockPosition:Boolean;
 		private var mockDirection:Boolean;
 
+		private var mode:Mode;
+
 		public function Game(mode:Mode):void {
-			this.init(mode);
+			this.mode = mode;
+
+			this.init();
 		}
 
 		public static const UP:int = 0;
@@ -56,32 +60,32 @@ package de.eiszfuchs.game.arrowmania {
 		public static const BLUE:uint = 0x2c5cf7;
 		public static const YELLOW:uint = 0xe6e668;
 		
-		private function init(mode:Mode):void {
+		private function init():void {
 			build();
 
 			this.tick = 1;
-			this.tickLengthBase = mode.tickLength;
+			this.tickLengthBase = this.mode.tickLength;
 			this.tickLengthMin = 5;
 			this.tickLength = this.tickLengthBase;
 			this.tickStep = 1;
-			this.tickDecrease = mode.tickDecrease;
+			this.tickDecrease = this.mode.tickDecrease;
 
-			this.speedBase = mode.speed;
+			this.speedBase = this.mode.speed;
 			this.speed = this.speedBase;
-			this.speedStep = mode.speedStep;
-			this.speedIncrease = mode.speedIncrease;
+			this.speedStep = this.mode.speedStep;
+			this.speedIncrease = this.mode.speedIncrease;
 
-			this.mockPosition = mode.mockPosition;
-			this.mockDirection = mode.mockDirection;
+			this.mockPosition = this.mode.mockPosition;
+			this.mockDirection = this.mode.mockDirection;
 			this.mocking = false;
-			this.mockStart = mode.mockStart;
+			this.mockStart = this.mode.mockStart;
 
 			this.points = 0;
 			this.arrows = new Array;
 			this.emitCount = this.arrows.length;
 
-			this.addEventListener(Event.ENTER_FRAME, this.updateTick);
 			this.addEventListener(Event.ENTER_FRAME, this.update);
+			this.addEventListener(Event.ENTER_FRAME, this.updateTick);
 			Main.master.stage.addEventListener(KeyboardEvent.KEY_DOWN, this.react);
 		}
 
@@ -114,8 +118,7 @@ package de.eiszfuchs.game.arrowmania {
 
 		private function update(event:Event = null):void {
 			if (tick === 1) {
-				var dir:int = this.randomDirection();
-				this.emit(dir, dir, dir, this.randomColor(), true);
+				this.emit();
 			}
 
 			for (var i:int = 0; i < this.arrows.length; i += 1) {
@@ -177,20 +180,6 @@ package de.eiszfuchs.game.arrowmania {
 			}
 		}
 
-		private function randomIndex():int {
-			return Math.floor(Math.random() * 4);
-		}
-
-		private function randomDirection():int {
-			var directions:Array = [UP, DOWN, LEFT, RIGHT];
-			return directions[this.randomIndex()];
-		}
-
-		private function randomColor():int {
-			var colors:Array = [RED, BLUE, GREEN, YELLOW];
-			return colors[this.randomIndex()];
-		}
-
 		/**
 		 * position  - slot  
 		 * direction - arrow direction
@@ -198,8 +187,8 @@ package de.eiszfuchs.game.arrowmania {
 		 * color     - color
 		 * flashing  - flashes?
 		 */
-		private function emit(position:int, direction:int, target:int, color:uint, flashing:Boolean):Arrow {
-			var arrow:Arrow = new Arrow(position, direction, target, color, flashing);
+		private function emit():Arrow {
+			var arrow:Arrow = this.mode.emit();
 				
 			arrow.y = this.stage.stageHeight + 10;
 			this.addChild(arrow);
@@ -219,7 +208,7 @@ package de.eiszfuchs.game.arrowmania {
 			}
 
 			if (Math.random() > 0.95) {
-				this.y = Math.random() * 20 - 10;
+				this.y = Math.random() * 40 - 20;
 			} else {
 				this.y = 0;
 			}
@@ -231,7 +220,6 @@ package de.eiszfuchs.game.arrowmania {
 
 		private function die():void {
 			this.removeEventListener(Event.ENTER_FRAME, this.update);
-			Main.master.stage.removeEventListener(KeyboardEvent.KEY_DOWN, this.react);
 
 			scoreFormat.size = 56;
 			scoreField.text = this.points.toString(10);
@@ -243,6 +231,15 @@ package de.eiszfuchs.game.arrowmania {
 			this.addEventListener(Event.ENTER_FRAME, this.noise);
 
 			// end of game
+		}
+
+		private function kill():void {
+			Main.master.stage.removeEventListener(KeyboardEvent.KEY_DOWN, this.react);
+			this.removeEventListener(Event.ENTER_FRAME, this.noise);
+
+			if (this.parent) {
+				this.parent.removeChild(this);
+			}
 		}
 	}
 }

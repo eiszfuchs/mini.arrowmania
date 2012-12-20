@@ -1,5 +1,8 @@
 package de.eiszfuchs.game.arrowmania.mode {
 	
+	import de.eiszfuchs.game.arrowmania.Game;
+	import de.eiszfuchs.game.arrowmania.Arrow;
+
 	/**
 	 * @author eiszfuchs
 	 */
@@ -25,6 +28,34 @@ package de.eiszfuchs.game.arrowmania.mode {
 			mockStart = 100;
 			mockPosition = false;
 			mockDirection = false;
+		}
+
+		public function emit():Arrow {
+			var direction:int = this.randomDirection();
+			var color:int = this.randomColor();
+			return new Arrow(direction, direction, direction, color, true);
+		}
+
+		protected function randomIndex():int {
+			return Math.floor(Math.random() * 4);
+		}
+
+		protected function getDirection(index:int):int {
+			var directions:Array = [Game.UP, Game.DOWN, Game.LEFT, Game.RIGHT];
+			return directions[index];
+		}
+
+		protected function getColor(index:int):int {
+			var colors:Array = [Game.RED, Game.BLUE, Game.GREEN, Game.YELLOW];
+			return colors[index];
+		}
+
+		protected function randomDirection():int {
+			return this.getDirection(this.randomIndex());
+		}
+
+		protected function randomColor():int {
+			return this.getColor(this.randomIndex());
 		}
 	}
 }
