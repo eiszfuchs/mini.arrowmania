@@ -15,19 +15,12 @@ package de.eiszfuchs.game.arrowmania.mode {
 		public var speedStep:Number;
 		public var speedIncrease:int;
 
-		public var mockStart:int;
-		public var mockPosition:Boolean;
-		public var mockDirection:Boolean;
-
 		public function Mode():void {
 			tickLength = 60;
 			tickDecrease = 10;
 			speed = 1;
 			speedStep = 0.05;
 			speedIncrease = 15;
-			mockStart = 100;
-			mockPosition = false;
-			mockDirection = false;
 		}
 
 		public function emit(index:int = 0):Arrow {
