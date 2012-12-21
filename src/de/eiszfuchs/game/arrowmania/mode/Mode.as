@@ -15,6 +15,8 @@ package de.eiszfuchs.game.arrowmania.mode {
 		public var speedStep:Number;
 		public var speedIncrease:int;
 
+		public var highscore:int = 0;
+
 		public function Mode():void {
 			tickLength = 60;
 			tickDecrease = 10;

@@ -46,8 +46,6 @@ package de.eiszfuchs.game.arrowmania {
 
 		TODO
 
-		- store high score
-
 		*/
 	}
 }

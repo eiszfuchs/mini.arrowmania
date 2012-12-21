@@ -231,8 +231,10 @@ package de.eiszfuchs.game.arrowmania {
 		private function die():void {
 			this.removeEventListener(Event.ENTER_FRAME, this.update);
 
+			this.mode.highscore = Math.max(this.points, this.mode.highscore);
+
 			scoreFormat.size = 56;
-			scoreField.text = this.points.toString(10) + "\n[ENTER]\n[ESC]";
+			scoreField.text = this.points.toString(10) + "\n(high: " + this.mode.highscore.toString(10) + ")\n[ENTER]\n[ESC]";
 			scoreField.setTextFormat(scoreFormat, 0, this.points.toString(10).length);
 			scoreField.x = 10;
 
