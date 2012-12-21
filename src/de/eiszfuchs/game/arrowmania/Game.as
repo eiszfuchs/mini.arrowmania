@@ -98,7 +98,7 @@ package de.eiszfuchs.game.arrowmania {
 			scoreField.selectable = false;
 			scoreField.autoSize = TextFieldAutoSize.LEFT;
 			scoreField.defaultTextFormat = this.scoreFormat;
-			scoreField.text = "0";
+			scoreField.text = "";
 
 			addChild(scoreField);
 
@@ -144,11 +144,7 @@ package de.eiszfuchs.game.arrowmania {
 			this.tickLength = Math.round(this.tickLength * 100) / 100;
 			this.speed = Math.round(this.speed * 100) / 100;
 
-			scoreField.text = this.points.toString(10)
-				+ "\n" + this.emitCount.toString(10)
-				+ "\n" + this.speed.toString(10)
-				+ "\n" + this.tick.toString(10)
-				+ "\n" + this.tickLength.toString(10);
+			scoreField.text = "";
 		}
 
 		private var died:Boolean = false;
@@ -191,9 +187,9 @@ package de.eiszfuchs.game.arrowmania {
 				arrow = this.arrows.shift();
 				this.death = arrow.getDirection();
 				if (death === key) {
-					arrow.kill();
-
 					this.points += 1;
+
+					arrow.kill(this.points.toString(10));
 
 					if (this.arrows.length < 1) {
 						// livin' on the edge!

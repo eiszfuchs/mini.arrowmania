@@ -31,11 +31,5 @@ package de.eiszfuchs.game.arrowmania {
 
 			this.addChild(new Menu);
 		}
-
-		/*
-
-		TODO
-
-		*/
 	}
 }

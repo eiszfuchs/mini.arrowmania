@@ -87,7 +87,14 @@ package de.eiszfuchs.game.arrowmania {
 			return this.target; // yes!
 		}
 
-		public function kill():void {
+		public function kill(gravestone:String = ""):void {
+			if (gravestone.length > 0) {
+				var death:Afterlife = new Afterlife(gravestone);
+				death.x = this.x;
+				death.y = this.y;
+				this.parent.addChild(death);
+			}
+
 			if (this.parent) {
 				this.parent.removeChild(this);
 			}
