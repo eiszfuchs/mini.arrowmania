@@ -34,6 +34,10 @@ package de.eiszfuchs.game.arrowmania.mode {
 			return new Arrow(dir, dir, dir, this.randomColor(), true);
 		}
 
+		public function getScore():int {
+			return Settings.getSetting(this.identifier, 0);
+		}
+
 		public function updateScore(score:int = 0):void {
 			this.highscore = Settings.getSetting(this.identifier, 0);
 			this.highscore = Math.max(score, this.highscore);
@@ -64,6 +68,25 @@ package de.eiszfuchs.game.arrowmania.mode {
 					return Game.UP;
 				case Game.LEFT:
 					return Game.RIGHT;
+			}
+
+			return -1;
+		}
+
+		protected function rotateDirection(direction:int, counter:Boolean = false):int {
+			switch (direction) {
+				case Game.UP:
+					if (counter) return Game.LEFT;
+					return Game.RIGHT;
+				case Game.RIGHT:
+					if (counter) return Game.UP;
+					return Game.DOWN;
+				case Game.DOWN:
+					if (counter) return Game.RIGHT;
+					return Game.LEFT;
+				case Game.LEFT:
+					if (counter) return Game.DOWN;
+					return Game.UP;
 			}
 
 			return -1;

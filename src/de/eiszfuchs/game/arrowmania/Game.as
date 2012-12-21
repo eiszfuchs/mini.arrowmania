@@ -152,6 +152,7 @@ package de.eiszfuchs.game.arrowmania {
 		}
 
 		private var died:Boolean = false;
+		private var death:int;
 
 		private function react(event:KeyboardEvent = null):void {
 			var key:uint = event.keyCode;
@@ -188,7 +189,8 @@ package de.eiszfuchs.game.arrowmania {
 
 				var arrow:Arrow;
 				arrow = this.arrows.shift();
-				if (arrow.getDirection() === key) {
+				this.death = arrow.getDirection();
+				if (death === key) {
 					arrow.kill();
 
 					this.points += 1;
@@ -254,6 +256,22 @@ package de.eiszfuchs.game.arrowmania {
 			// this.rotation = 5;
 
 			this.addEventListener(Event.ENTER_FRAME, this.noise);
+
+			// what had to be pressed?
+			var correct:Shape = new Shape;
+
+			var g:Graphics = correct.graphics;
+			g.clear();
+			g.lineStyle(1, WHITE, 1, true);
+			g.beginFill(BLACK, 0.5);
+			Arrow.shape(g);
+			g.endFill();
+
+			correct.x = 150 / 2;
+			correct.y = Main.master.stage.stageHeight / 2;
+			correct.scaleX = correct.scaleY = 6;
+			Arrow.rotate(correct, death);
+			this.addChild(correct);
 
 			// end of game
 

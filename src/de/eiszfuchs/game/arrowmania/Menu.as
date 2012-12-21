@@ -25,9 +25,9 @@ package de.eiszfuchs.game.arrowmania {
 		private var select:int = 0;
 
 		public function Menu():void {
-			this.classes = [Normal, Kickstart, Ultra, Fooling, Crazy, Attention];
-			this.labels = ["Normal", "Kickstart", "Ultra", "Fooling", "Crazy", "Attention"];
-			this.descriptions = ["Normal", "Kickstart", "Ultra", "Fooling", "Crazy", "Attention"];
+			this.classes = [Normal, Kickstart, Ultra, Fooling, Crazy, Attention, Rotate];
+			this.labels = ["Normal", "Kickstart", "Ultra", "Fooling", "Crazy", "Attention", "Rotate"];
+			this.descriptions = ["Normal", "Kickstart", "Ultra", "Fooling", "Crazy", "Attention", "Rotate"];
 
 			this.live();
 		}
@@ -62,10 +62,13 @@ package de.eiszfuchs.game.arrowmania {
 				var selectFormat:TextFormat;
 				var selectField:TextField;
 
+				var scoreMode:Mode = new this.classes[i];
+				var score:int = scoreMode.getScore();
+
 				selectFormat = new TextFormat;
 				selectFormat.font = "Arial";
 				selectFormat.size = 16;
-				selectFormat.bold = true;
+				selectFormat.bold = false;
 				selectField = new TextField;
 				selectField.type = TextFieldType.DYNAMIC;
 				selectField.textColor = Game.SLOT;
@@ -74,7 +77,7 @@ package de.eiszfuchs.game.arrowmania {
 				selectField.selectable = false;
 				selectField.autoSize = TextFieldAutoSize.LEFT;
 				selectField.defaultTextFormat = selectFormat;
-				selectField.text = this.labels[i];
+				selectField.text = this.labels[i] + " (" + score.toString(10) + ")";
 
 				selectField.x = 40;
 				selectField.y = 20 + i * 30;

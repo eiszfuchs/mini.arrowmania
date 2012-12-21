@@ -5,19 +5,23 @@ package de.eiszfuchs.game.arrowmania.mode {
 	/**
 	 * @author eiszfuchs
 	 */
-	public class Normal extends Mode {
+	public class Rotate extends Mode {
 
-		public function Normal():void {
+		public function Rotate():void {
 			super();
 
-			this.identifier = "Normal";
+			this.identifier = "Rotate";
 		}
 
 		override public function emit(index:int = 0):Arrow {
 			var offset:int = this.randomIndex();
 			var direction:int = this.getDirection(offset);
 			var color:uint = this.getColor(offset);
-			return new Arrow(direction, direction, direction, color, false);
+
+			var flashing:Boolean = Math.random() > 0.25;
+			var target:int = this.rotateDirection(direction, flashing);
+
+			return new Arrow(direction, direction, target, color, flashing);
 		}
 	}
 }
