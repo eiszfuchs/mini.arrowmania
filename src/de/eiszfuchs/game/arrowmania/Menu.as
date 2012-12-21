@@ -25,9 +25,9 @@ package de.eiszfuchs.game.arrowmania {
 		private var select:int = 0;
 
 		public function Menu():void {
-			this.classes = [Normal, Kickstart, Ultra];
-			this.labels = ["Normal", "Kickstart", "Ultra"];
-			this.descriptions = ["Normal", "Kickstart", "Ultra"];
+			this.classes = [Normal, Kickstart, Ultra, Fooling, Crazy, Attention];
+			this.labels = ["Normal", "Kickstart", "Ultra", "Fooling", "Crazy", "Attention"];
+			this.descriptions = ["Normal", "Kickstart", "Ultra", "Fooling", "Crazy", "Attention"];
 
 			this.live();
 		}

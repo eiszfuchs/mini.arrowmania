@@ -44,6 +44,21 @@ package de.eiszfuchs.game.arrowmania.mode {
 			return colors[index];
 		}
 
+		protected function reverseDirection(direction:int):int {
+			switch (direction) {
+				case Game.UP:
+					return Game.DOWN;
+				case Game.RIGHT:
+					return Game.LEFT;
+				case Game.DOWN:
+					return Game.UP;
+				case Game.LEFT:
+					return Game.RIGHT;
+			}
+
+			return -1;
+		}
+
 		protected function randomDirection():int {
 			return this.getDirection(this.randomIndex());
 		}
