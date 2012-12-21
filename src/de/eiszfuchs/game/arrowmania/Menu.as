@@ -1,5 +1,6 @@
 package de.eiszfuchs.game.arrowmania {
 
+	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.display.Graphics;
 	import flash.events.KeyboardEvent;
@@ -27,7 +28,15 @@ package de.eiszfuchs.game.arrowmania {
 		public function Menu():void {
 			this.classes = [Normal, Kickstart, Ultra, Fooling, Crazy, Attention, Rotate];
 			this.labels = ["Normal", "Kickstart", "Ultra", "Fooling", "Crazy", "Attention", "Rotate"];
-			this.descriptions = ["Normal", "Kickstart", "Ultra", "Fooling", "Crazy", "Attention", "Rotate"];
+			this.descriptions = [
+				"Normal: Hit the key in the direction of the arrows.",
+				"Kickstart: Like 'Normal', but will skip the first 400-500 arrows.",
+				"Ultra: Like 'Normal', but at higher speed.",
+				"Fooling: Like 'Normal', but sometimes arrows will come out of the wrong slot.",
+				"Crazy: Arrows will appear in blue (press direction of slot) and red (press direction of arrow). If flashing, hit the opposite key.",
+				"Attention: If flashing, press direction of slot, otherwise direction of arrow.",
+				"Rotate: Press the direction of the arrow, rotated one step clockwise. If flashing, rotate counter-clockwise."
+			];
 
 			this.live();
 		}
@@ -57,42 +66,69 @@ package de.eiszfuchs.game.arrowmania {
 			this.draw();
 		}
 
+		private function createTextField():TextField {
+			var selectFormat:TextFormat;
+			var selectField:TextField;
+
+			selectFormat = new TextFormat;
+			selectFormat.font = "Arial";
+			selectFormat.size = 14;
+			selectFormat.bold = false;
+			selectField = new TextField;
+			selectField.type = TextFieldType.DYNAMIC;
+			selectField.textColor = Game.SLOT;
+			selectField.embedFonts = false; // TODO: true
+			selectField.mouseEnabled = false;
+			selectField.selectable = false;
+			selectField.autoSize = TextFieldAutoSize.LEFT;
+			selectField.defaultTextFormat = selectFormat;
+
+			return selectField;
+		}
+
+		private var descriptionField:TextField;
+		private var selectionArrow:Shape = new Shape;
 		private function build():void {
 			for (var i:int = 0; i < this.classes.length; i += 1) {
-				var selectFormat:TextFormat;
-				var selectField:TextField;
-
 				var scoreMode:Mode = new this.classes[i];
 				var score:int = scoreMode.getScore();
 
-				selectFormat = new TextFormat;
-				selectFormat.font = "Arial";
-				selectFormat.size = 16;
-				selectFormat.bold = false;
-				selectField = new TextField;
-				selectField.type = TextFieldType.DYNAMIC;
-				selectField.textColor = Game.SLOT;
-				selectField.embedFonts = false; // TODO: true
-				selectField.mouseEnabled = false;
-				selectField.selectable = false;
-				selectField.autoSize = TextFieldAutoSize.LEFT;
-				selectField.defaultTextFormat = selectFormat;
+				var selectField:TextField = this.createTextField();
 				selectField.text = this.labels[i] + " (" + score.toString(10) + ")";
 
 				selectField.x = 40;
-				selectField.y = 20 + i * 30;
+				selectField.y = 20 + i * 24;
 
 				this.addChild(selectField);
 			}
-		}
 
-		private function draw():void {
-			var g:Graphics = this.graphics;
+			this.descriptionField = this.createTextField();
+			this.descriptionField.multiline = true;
+			this.descriptionField.wordWrap = true;
+			this.descriptionField.width = 130;
+
+			this.descriptionField.x = 10;
+			this.descriptionField.y = 40 + i * 24;
+
+			this.addChild(this.descriptionField);
+
+			var g:Graphics = this.selectionArrow.graphics;
 
 			g.clear();
 			g.beginFill(Game.RED);
-			Arrow.shape(g, 20, 30 + this.select * 30);
+			Arrow.shape(g);
 			g.endFill();
+
+			Arrow.rotate(this.selectionArrow, Game.RIGHT);
+
+			this.addChild(this.selectionArrow);
+		}
+
+		private function draw():void {
+			this.selectionArrow.x = 24;
+			this.selectionArrow.y = 30 + this.select * 24;
+
+			this.descriptionField.text = this.descriptions[this.select];
 		}
 
 		private function live():void {
