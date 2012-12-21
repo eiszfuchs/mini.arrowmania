@@ -26,12 +26,13 @@ package de.eiszfuchs.game.arrowmania {
 		private var select:int = 0;
 
 		public function Menu():void {
-			this.classes = [Normal, Kickstart, Ultra, Fooling, Crazy, Attention, Rotate];
-			this.labels = ["Normal", "Kickstart", "Ultra", "Fooling", "Crazy", "Attention", "Rotate"];
+			this.classes = [Normal, Kickstart, Ultra, Extreme, Fooling, Crazy, Attention, Rotate];
+			this.labels = ["Normal", "Kickstart", "Ultra", "Extreme", "Fooling", "Crazy", "Attention", "Rotate"];
 			this.descriptions = [
 				"Normal: Hit the key in the direction of the arrows.",
 				"Kickstart: Like 'Normal', but will skip the first 400-500 arrows.",
-				"Ultra: Like 'Normal', but at higher speed.",
+				"Ultra: Like 'Normal', but at WAY higher speed.",
+				"Extreme: Like 'Ultra', but at EVEN MORE higher speed. (may change)",
 				"Fooling: Like 'Normal', but sometimes arrows will come out of the wrong slot.",
 				"Crazy: Arrows will appear in blue (press direction of slot) and red (press direction of arrow). If flashing, hit the opposite key.",
 				"Attention: If flashing, press direction of slot, otherwise direction of arrow.",
