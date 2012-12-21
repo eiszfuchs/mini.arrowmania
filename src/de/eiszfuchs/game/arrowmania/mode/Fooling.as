@@ -19,8 +19,10 @@ package de.eiszfuchs.game.arrowmania.mode {
 			var color:uint = this.getColor(offset);
 
 			var slot:int;
-			if (Math.random() > 0.95) {
-				slot = this.randomDirection();
+			if (Math.random() > 0.92) {
+				offset = this.randomIndex();
+				slot = this.getDirection(offset);
+				color = this.getColor(offset);
 			} else {
 				slot = direction;
 			}
