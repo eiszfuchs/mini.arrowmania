@@ -18,16 +18,6 @@ package de.eiszfuchs.game.arrowmania {
 				this.addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 
-		// possible arrows as of arrow mania II:
-		// (! = opposite)
-		// - direction = key
-		// - position = key
-		// - flashing ? direction = key : direction = !key
-		// - flashing ? position = key : position = !key
-		// - flashing ? position = key : direction = key
-		// - flashing ? direction = key : position = key
-		// - ...
-
 		private function init(e:Event = null):void {
 			this.removeEventListener(Event.ADDED_TO_STAGE, init);
 			// entry point
