@@ -232,7 +232,7 @@ package de.eiszfuchs.game.arrowmania {
 			this.removeEventListener(Event.ENTER_FRAME, this.update);
 
 			scoreFormat.size = 56;
-			scoreField.text = this.points.toString(10) + "\n[ENTER]";
+			scoreField.text = this.points.toString(10) + "\n[ENTER]\n[ESC]";
 			scoreField.setTextFormat(scoreFormat, 0, this.points.toString(10).length);
 			scoreField.x = 10;
 

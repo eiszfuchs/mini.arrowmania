@@ -24,10 +24,8 @@ package de.eiszfuchs.game.arrowmania.mode {
 		}
 
 		public function emit(index:int = 0):Arrow {
-			var index:int = this.randomIndex();
-			var direction:int = this.getDirection(index);
-			var color:uint = this.getColor(index);
-			return new Arrow(direction, direction, direction, color, true);
+			var dir:int = this.randomDirection();
+			return new Arrow(dir, dir, dir, this.randomColor(), true);
 		}
 
 		protected function randomIndex():int {
