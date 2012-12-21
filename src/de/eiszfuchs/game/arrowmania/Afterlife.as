@@ -27,29 +27,32 @@ package de.eiszfuchs.game.arrowmania {
 			var deathField:TextField;
 
 			deathFormat = new TextFormat;
-			deathFormat.font = "Arial";
+			deathFormat.font = "News Cycle Bold";
 			deathFormat.size = 12;
-			deathFormat.bold = false;
 			deathField = new TextField;
 			deathField.type = TextFieldType.DYNAMIC;
 			deathField.textColor = Game.SLOT;
-			deathField.embedFonts = false; // TODO: true
+			deathField.embedFonts = true;
 			deathField.mouseEnabled = false;
 			deathField.selectable = false;
 			deathField.autoSize = TextFieldAutoSize.LEFT;
 			deathField.defaultTextFormat = deathFormat;
 			deathField.text = message;
 
+			deathField.x -= deathField.width / 2;
+
 			this.addChild(deathField);
 		}
 
 		private function update(event:Event = null):void {
+			var fadeLength:int = 35;
+
 			this.tick += 1;
 			this.y -= 0.5;
 
-			this.alpha = (30 - tick) / 30;
+			this.alpha = (fadeLength - tick) / fadeLength;
 
-			if (this.tick > 30) {
+			if (this.tick > fadeLength) {
 				this.die();
 			}
 		}

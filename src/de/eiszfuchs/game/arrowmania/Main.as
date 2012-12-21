@@ -11,6 +11,10 @@ package de.eiszfuchs.game.arrowmania {
 
 		public static var master:Main;
 
+		// http://openfontlibrary.org/en/font/news-cycle
+		// [Embed(source="/com/fonts/newscycle-regular.ttf", fontFamily="News Cycle Regular", embedAsCFF="false")] public var NEWSCYCLEREGULAR:String;
+		[Embed(source="/com/fonts/newscycle-bold.ttf", fontFamily="News Cycle Bold", embedAsCFF="false")] public var NEWSCYCLEBOLD:String;
+
 		public function Main():void {
 			if (stage)
 				this.init();

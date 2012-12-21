@@ -72,13 +72,12 @@ package de.eiszfuchs.game.arrowmania {
 			var selectField:TextField;
 
 			selectFormat = new TextFormat;
-			selectFormat.font = "Arial";
+			selectFormat.font = "News Cycle Bold";
 			selectFormat.size = 14;
-			selectFormat.bold = false;
 			selectField = new TextField;
 			selectField.type = TextFieldType.DYNAMIC;
 			selectField.textColor = Game.SLOT;
-			selectField.embedFonts = false; // TODO: true
+			selectField.embedFonts = true;
 			selectField.mouseEnabled = false;
 			selectField.selectable = false;
 			selectField.autoSize = TextFieldAutoSize.LEFT;
@@ -98,7 +97,7 @@ package de.eiszfuchs.game.arrowmania {
 				selectField.text = this.labels[i] + " (" + score.toString(10) + ")";
 
 				selectField.x = 40;
-				selectField.y = 20 + i * 24;
+				selectField.y = 16 + i * 24;
 
 				this.addChild(selectField);
 			}
