@@ -9,6 +9,8 @@ package de.eiszfuchs.game.arrowmania.mode {
 
 		public function Fooling():void {
 			super();
+
+			this.identifier = "Fooling";
 		}
 
 		override public function emit(index:int = 0):Arrow {

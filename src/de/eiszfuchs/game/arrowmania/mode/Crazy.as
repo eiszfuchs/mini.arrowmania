@@ -13,6 +13,8 @@ package de.eiszfuchs.game.arrowmania.mode {
 
 			this.speed = 0.5;
 			this.tickLength = 100;
+
+			this.identifier = "Crazy";
 		}
 
 		override public function emit(index:int = 0):Arrow {

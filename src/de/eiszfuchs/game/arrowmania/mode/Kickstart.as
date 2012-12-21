@@ -13,6 +13,8 @@ package de.eiszfuchs.game.arrowmania.mode {
 			this.speed = 1.9;
 			this.tickLength = 40;
 			speedIncrease = 10;
+
+			this.identifier = "Kickstart";
 		}
 	}
 }

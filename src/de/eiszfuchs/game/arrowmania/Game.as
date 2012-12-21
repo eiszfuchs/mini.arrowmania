@@ -182,6 +182,10 @@ package de.eiszfuchs.game.arrowmania {
 						break;
 				}
 
+				if (this.arrows.length < 1) {
+					return;
+				}
+
 				var arrow:Arrow;
 				arrow = this.arrows.shift();
 				if (arrow.getDirection() === key) {
@@ -240,7 +244,7 @@ package de.eiszfuchs.game.arrowmania {
 		private function die():void {
 			this.removeEventListener(Event.ENTER_FRAME, this.update);
 
-			this.mode.highscore = Math.max(this.points, this.mode.highscore);
+			this.mode.updateScore(this.points);
 
 			scoreFormat.size = 56;
 			scoreField.text = this.points.toString(10) + "\n(high: " + this.mode.highscore.toString(10) + ")\n[ENTER]\n[ESC]";
