@@ -76,7 +76,7 @@ package de.eiszfuchs.game.arrowmania {
 				selectField.defaultTextFormat = selectFormat;
 				selectField.text = this.labels[i];
 
-				selectField.x = 50;
+				selectField.x = 40;
 				selectField.y = 20 + i * 30;
 
 				this.addChild(selectField);
@@ -88,7 +88,7 @@ package de.eiszfuchs.game.arrowmania {
 
 			g.clear();
 			g.beginFill(Game.SLOT);
-			Arrow.shape(g, 30, 30 + this.select * 30);
+			Arrow.shape(g, 20, 30 + this.select * 30);
 			g.endFill();
 		}
 

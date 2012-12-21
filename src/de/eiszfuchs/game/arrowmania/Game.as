@@ -63,7 +63,7 @@ package de.eiszfuchs.game.arrowmania {
 
 			this.tick = 1;
 			this.tickLengthBase = this.mode.tickLength;
-			this.tickLengthMin = 5;
+			this.tickLengthMin = 4;
 			this.tickLength = this.tickLengthBase;
 			this.tickStep = 1;
 			this.tickDecrease = this.mode.tickDecrease;
@@ -161,6 +161,7 @@ package de.eiszfuchs.game.arrowmania {
 						this.restart();
 						return;
 					case Keyboard.ESCAPE:
+						this.parent.addChild(new Menu);
 						this.kill();
 						return;
 				}
@@ -265,8 +266,6 @@ package de.eiszfuchs.game.arrowmania {
 			this.removeEventListener(Event.ENTER_FRAME, this.noise);
 
 			if (this.parent) {
-				this.parent.addChild(new Menu);
-
 				this.parent.removeChild(this);
 			}
 		}
