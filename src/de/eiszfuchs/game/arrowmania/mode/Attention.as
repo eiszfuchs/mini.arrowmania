@@ -12,7 +12,10 @@ package de.eiszfuchs.game.arrowmania.mode {
 			super();
 
 			this.speed = 0.8;
+			this.speedStep = 0.1;
+			this.speedIncrease = 12;
 			this.tickLength = 80;
+			this.tickDecrease = 8;
 
 			this.identifier = "Attention";
 		}
