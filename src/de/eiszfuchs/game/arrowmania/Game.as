@@ -150,43 +150,50 @@ package de.eiszfuchs.game.arrowmania {
 				+ "\n" + this.tickLength.toString(10);
 		}
 
+		private var died:Boolean = false;
+
 		private function react(event:KeyboardEvent = null):void {
 			var key:uint = event.keyCode;
 
-			switch (key) {
-				case Keyboard.UP:
-					key = UP;
-					break;
-				case Keyboard.RIGHT:
-					key = RIGHT;
-					break;
-				case Keyboard.DOWN:
-					key = DOWN;
-					break;
-				case Keyboard.LEFT:
-					key = LEFT;
-					break;
-				case Keyboard.ENTER:
-					this.restart();
-					return;
-				case Keyboard.ESCAPE:
-					this.kill();
-					return;
-			}
-
-			var arrow:Arrow;
-			arrow = this.arrows.shift();
-			if (arrow.getDirection() === key) {
-				arrow.kill();
-
-				this.points += 1;
-
-				if (this.arrows.length < 1) {
-					// livin' on the edge!
-					// this.tick = 1;
+			if (this.died) {
+				switch (key) {
+					case Keyboard.ENTER:
+						this.restart();
+						return;
+					case Keyboard.ESCAPE:
+						this.kill();
+						return;
 				}
 			} else {
-				this.die();
+				switch (key) {
+					case Keyboard.UP:
+						key = UP;
+						break;
+					case Keyboard.RIGHT:
+						key = RIGHT;
+						break;
+					case Keyboard.DOWN:
+						key = DOWN;
+						break;
+					case Keyboard.LEFT:
+						key = LEFT;
+						break;
+				}
+
+				var arrow:Arrow;
+				arrow = this.arrows.shift();
+				if (arrow.getDirection() === key) {
+					arrow.kill();
+
+					this.points += 1;
+
+					if (this.arrows.length < 1) {
+						// livin' on the edge!
+						// this.tick = 1;
+					}
+				} else {
+					this.die();
+				}
 			}
 		}
 
@@ -243,6 +250,8 @@ package de.eiszfuchs.game.arrowmania {
 			this.addEventListener(Event.ENTER_FRAME, this.noise);
 
 			// end of game
+
+			this.died = true;
 		}
 
 		private function restart():void {
@@ -256,6 +265,8 @@ package de.eiszfuchs.game.arrowmania {
 			this.removeEventListener(Event.ENTER_FRAME, this.noise);
 
 			if (this.parent) {
+				this.parent.addChild(new Menu);
+
 				this.parent.removeChild(this);
 			}
 		}
