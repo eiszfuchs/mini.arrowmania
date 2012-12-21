@@ -51,8 +51,9 @@ package de.eiszfuchs.game.arrowmania {
 		public static const DOWN:int = 2;
 		public static const LEFT:int = 0;
 
+		public static const BLACK:uint = 0x000000;
 		public static const WHITE:uint = 0xffffff;
-		public static const SLOT:uint = 0xb5b5b5;
+		public static const SLOT:uint = 0xb2b2b2;
 		public static const RED:uint = 0xff2277;
 		public static const GREEN:uint = 0x81db50;
 		public static const BLUE:uint = 0x2c5cf7;

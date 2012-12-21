@@ -4,6 +4,8 @@ package de.eiszfuchs.game.arrowmania {
 	import flash.display.Sprite;
 	import flash.display.Graphics;
 
+	import flash.filters.*;
+
 	import flash.events.Event;
 
 	/**
@@ -71,8 +73,13 @@ package de.eiszfuchs.game.arrowmania {
 			if (this.flashing) {
 				var g:Graphics = this.graphics;
 
-				g.lineStyle(0, 0x000000, Math.abs(tick / (tickLength / 2) - 1), true);
+				var amount:Number = Math.abs(tick / (tickLength / 2) - 1);
+				g.lineStyle(1, Game.BLACK, amount, true);
 				Arrow.shape(g);
+
+				this.filters = [
+					new BlurFilter(amount * 5, 0, 2)
+				];
 			}
 		}
 

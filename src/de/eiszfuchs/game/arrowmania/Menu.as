@@ -68,7 +68,7 @@ package de.eiszfuchs.game.arrowmania {
 				selectFormat.bold = true;
 				selectField = new TextField;
 				selectField.type = TextFieldType.DYNAMIC;
-				selectField.textColor = Game.RED;
+				selectField.textColor = Game.SLOT;
 				selectField.embedFonts = false; // TODO: true
 				selectField.mouseEnabled = false;
 				selectField.selectable = false;
@@ -87,7 +87,7 @@ package de.eiszfuchs.game.arrowmania {
 			var g:Graphics = this.graphics;
 
 			g.clear();
-			g.beginFill(Game.SLOT);
+			g.beginFill(Game.RED);
 			Arrow.shape(g, 20, 30 + this.select * 30);
 			g.endFill();
 		}
