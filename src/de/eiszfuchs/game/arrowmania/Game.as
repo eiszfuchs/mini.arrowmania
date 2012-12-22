@@ -182,6 +182,7 @@ package de.eiszfuchs.game.arrowmania {
 					return;
 				}
 
+				// TODO: put this check into the Mode
 				var arrow:Arrow;
 				arrow = this.arrows.shift();
 				this.death = arrow.getDirection();
