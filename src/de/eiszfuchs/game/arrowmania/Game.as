@@ -196,8 +196,6 @@ package de.eiszfuchs.game.arrowmania {
 						// this.tick = 1;
 					}
 				} else {
-					this.mode.postScore();
-
 					this.death = check.key;
 					this.die();
 				}
@@ -246,6 +244,8 @@ package de.eiszfuchs.game.arrowmania {
 			this.removeEventListener(Event.ENTER_FRAME, this.update);
 
 			this.mode.updateScore(this.points);
+
+			this.mode.postScore();
 
 			scoreFormat.size = 56;
 			scoreField.text = this.points.toString(10) + "\n(high: " + this.mode.highscore.toString(10) + ")\n[ENTER]\n[ESC]";
