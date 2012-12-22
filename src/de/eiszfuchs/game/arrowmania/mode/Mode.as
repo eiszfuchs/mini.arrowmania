@@ -34,6 +34,22 @@ package de.eiszfuchs.game.arrowmania.mode {
 			return new Arrow(dir, dir, dir, this.randomColor(), true);
 		}
 
+		public function check(arrows:Array, pressed:int):Object {
+			var arrow:Arrow = arrows[0];
+			var key:int = arrow.getDirection();
+
+			return this.checkResponse(key, key === pressed, 0, 1);
+		}
+
+		private function checkResponse(key:int, correct:Boolean = false, killIndex:int = 0, killAmount:int = 0):Object {
+			return {
+				key: key,
+				correct: correct,
+				killIndex: killIndex,
+				killAmount: killAmount
+			};
+		}
+
 		public function getScore():int {
 			return Settings.getSetting(this.identifier, 0);
 		}

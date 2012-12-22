@@ -182,20 +182,21 @@ package de.eiszfuchs.game.arrowmania {
 					return;
 				}
 
-				// TODO: put this check into the Mode
-				var arrow:Arrow;
-				arrow = this.arrows.shift();
-				this.death = arrow.getDirection();
-				if (death === key) {
-					this.points += 1;
+				var check:Object = this.mode.check(this.arrows, key);
+				if (check.correct) {
+					this.points += check.killAmount;
 
-					arrow.kill(this.points.toString(10));
+					for (var i:int = 0; i < check.killAmount; i += 1) {
+						var arrow:Arrow = this.arrows.splice(check.killIndex, 1)[0];
+						arrow.kill(this.points.toString(10));
+					}
 
 					if (this.arrows.length < 1) {
 						// livin' on the edge!
 						// this.tick = 1;
 					}
 				} else {
+					this.death = check.key;
 					this.die();
 				}
 			}
