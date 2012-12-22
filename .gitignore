@@ -1,7 +1,10 @@
 *.ttf
 
 # Build and Release Folders
-bin/
+*.swf
+*.cache
+*.html
+*.js
 bin-debug/
 bin-release/
 

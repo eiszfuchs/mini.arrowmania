@@ -196,6 +196,8 @@ package de.eiszfuchs.game.arrowmania {
 						// this.tick = 1;
 					}
 				} else {
+					this.mode.postScore();
+
 					this.death = check.key;
 					this.die();
 				}

@@ -5,6 +5,8 @@ package de.eiszfuchs.game.arrowmania.mode {
 
 	import de.eiszfuchs.utils.Settings;
 
+	import flash.net.*;
+
 	/**
 	 * @author eiszfuchs
 	 */
@@ -52,6 +54,28 @@ package de.eiszfuchs.game.arrowmania.mode {
 
 		public function getScore():int {
 			return Settings.getSetting(this.identifier, 0);
+		}
+
+		public function postScore():void {
+			var url:String = "scoreboard.php";
+			var request:URLRequest = new URLRequest(url);
+			var requestVars:URLVariables = new URLVariables();
+				requestVars.score = this.getScore();
+				requestVars.mode = this.identifier;
+				requestVars.player_id = Settings.getSetting('player_id', -1);
+				requestVars.player_nick = Settings.getSetting('player_nick', "Player");
+				requestVars.date = (new Date).getTime();
+			request.data = requestVars;
+			request.method = URLRequestMethod.POST;
+
+			var urlLoader:URLLoader = new URLLoader();
+			urlLoader = new URLLoader();
+				// urlLoader.addEventListener(Event.COMPLETE, loaderCompleteHandler, false, 0, true);
+				// urlLoader.addEventListener(HTTPStatusEvent.HTTP_STATUS, httpStatusHandler, false, 0, true);
+				// urlLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler, false, 0, true);
+				// urlLoader.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler, false, 0, true);
+				urlLoader.load(request);
+
 		}
 
 		public function updateScore(score:int = 0):void {

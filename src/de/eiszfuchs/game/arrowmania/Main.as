@@ -4,6 +4,8 @@ package de.eiszfuchs.game.arrowmania {
 	import flash.events.*;
 	import flash.ui.Keyboard;
 
+	import de.eiszfuchs.utils.*;
+
 	/**
 	 * @author eiszfuchs
 	 */
@@ -25,6 +27,14 @@ package de.eiszfuchs.game.arrowmania {
 		private function init(e:Event = null):void {
 			this.removeEventListener(Event.ADDED_TO_STAGE, init);
 			// entry point
+
+			var id:Number = Settings.getSetting('player_id', -1);
+			if (id < 0) {
+				var now:Date = new Date;
+				id = now.getTime();
+
+				Settings.setSetting('player_id', id.toString(36));
+			}
 
 			Main.master = this;
 
