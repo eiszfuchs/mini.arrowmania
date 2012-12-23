@@ -18,6 +18,7 @@ package de.eiszfuchs.game.arrowmania {
 
 		public function Afterlife(message:String) {
 			this.addEventListener(Event.ENTER_FRAME, this.update);
+			// this.addEventListener(Event.ENTER_FRAME, Main.noise(this));
 
 			draw(message);
 		}
@@ -59,6 +60,7 @@ package de.eiszfuchs.game.arrowmania {
 
 		private function die():void {
 			this.removeEventListener(Event.ENTER_FRAME, this.update);
+			// this.removeEventListener(Event.ENTER_FRAME, Main.noise(this));
 			this.parent.removeChild(this);
 		}
 	}

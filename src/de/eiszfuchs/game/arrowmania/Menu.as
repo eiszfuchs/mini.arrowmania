@@ -12,6 +12,7 @@ package de.eiszfuchs.game.arrowmania {
 	import flash.text.TextFormat;
 	import flash.text.AntiAliasType;
 
+	import de.eiszfuchs.utils.*;
 	import de.eiszfuchs.game.arrowmania.mode.*;
 
 	/**
@@ -26,9 +27,10 @@ package de.eiszfuchs.game.arrowmania {
 		private var select:int = 0;
 
 		public function Menu():void {
-			this.classes = [Normal, Kickstart, Ultra, Extreme, Fooling, Crazy, Attention, Rotate];
-			this.labels = ["Normal", "Kickstart", "Ultra", "Extreme", "Fooling", "Crazy", "Attention", "Rotate"];
+			this.classes = [Nick, Normal, Kickstart, Ultra, Extreme, Fooling, Crazy, Attention, Rotate];
+			this.labels = ["Change nick", "Normal", "Kickstart", "Ultra", "Extreme", "Fooling", "Crazy", "Attention", "Rotate"];
 			this.descriptions = [
+				"Change your nickname (" + Settings.getSetting('player_nick', "Player") + ") for the high scores.",
 				"Normal: Hit the key in the direction of the arrows.",
 				"Kickstart: Like 'Normal', but will skip the first 400-500 arrows.",
 				"Ultra: Like 'Normal', but at WAY higher speed.",
@@ -53,7 +55,12 @@ package de.eiszfuchs.game.arrowmania {
 					this.select += 1;
 					break;
 				case Keyboard.ENTER:
-					this.parent.addChild(new Game(new this.classes[this.select]));
+					if (new this.classes[this.select] is Mode) {
+						this.parent.addChild(new Game(new this.classes[this.select]));
+					} else {
+						this.parent.addChild(new this.classes[this.select]);
+					}
+
 					this.die();
 					break;
 			}
@@ -74,6 +81,7 @@ package de.eiszfuchs.game.arrowmania {
 			selectFormat = new TextFormat;
 			selectFormat.font = "News Cycle Bold";
 			selectFormat.size = 14;
+			selectFormat.leading = -3;
 			selectField = new TextField;
 			selectField.type = TextFieldType.DYNAMIC;
 			selectField.textColor = Game.SLOT;
@@ -89,15 +97,20 @@ package de.eiszfuchs.game.arrowmania {
 		private var descriptionField:TextField;
 		private var selectionArrow:Shape = new Shape;
 		private function build():void {
-			for (var i:int = 0; i < this.classes.length; i += 1) {
-				var scoreMode:Mode = new this.classes[i];
-				var score:int = scoreMode.getScore();
+			this.addChild(new Logo);
 
+			for (var i:int = 0; i < this.classes.length; i += 1) {
 				var selectField:TextField = this.createTextField();
-				selectField.text = this.labels[i] + " (" + score.toString(10) + ")";
+				selectField.text = this.labels[i];
+
+				if (new this.classes[i] is Mode) {
+					var scoreMode:Mode = new this.classes[i];
+					var score:int = (scoreMode).getScore();
+					selectField.appendText(" (" + score.toString(10) + ")");
+				}
 
 				selectField.x = 40;
-				selectField.y = 16 + i * 24;
+				selectField.y = 56 + i * 24;
 
 				this.addChild(selectField);
 			}
@@ -108,7 +121,7 @@ package de.eiszfuchs.game.arrowmania {
 			this.descriptionField.width = 130;
 
 			this.descriptionField.x = 10;
-			this.descriptionField.y = 40 + i * 24;
+			this.descriptionField.y = 70 + i * 24;
 
 			this.addChild(this.descriptionField);
 
@@ -126,16 +139,16 @@ package de.eiszfuchs.game.arrowmania {
 
 		private function draw():void {
 			this.selectionArrow.x = 24;
-			this.selectionArrow.y = 30 + this.select * 24;
+			this.selectionArrow.y = 70 + this.select * 24;
 
 			this.descriptionField.text = this.descriptions[this.select];
 		}
 
 		private function live():void {
-			Main.master.stage.addEventListener(KeyboardEvent.KEY_DOWN, this.react);
-
 			this.build();
 			this.draw();
+
+			Main.master.stage.addEventListener(KeyboardEvent.KEY_DOWN, this.react);
 		}
 
 		private function die():void {

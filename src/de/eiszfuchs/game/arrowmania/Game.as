@@ -6,8 +6,6 @@ package de.eiszfuchs.game.arrowmania {
 	import flash.events.*;
 	import flash.ui.Keyboard;
 
-	import flash.filters.*;
-
 	import flash.text.TextField;
 	import flash.text.TextFieldType;
 	import flash.text.TextFieldAutoSize;
@@ -222,24 +220,6 @@ package de.eiszfuchs.game.arrowmania {
 			return arrow;
 		}
 
-		private function noise(event:Event = null):void {
-			if (Math.random() > 0.9) {
-				this.x = Math.random() * 10 - 5;
-			} else {
-				this.x = 0;
-			}
-
-			if (Math.random() > 0.95) {
-				this.y = Math.random() * 40 - 20;
-			} else {
-				this.y = 0;
-			}
-
-			this.filters = [
-				new BlurFilter(Math.random() * 10, 0, 2)
-			];
-		}
-
 		private function die():void {
 			this.removeEventListener(Event.ENTER_FRAME, this.update);
 
@@ -255,7 +235,7 @@ package de.eiszfuchs.game.arrowmania {
 
 			// this.rotation = 5;
 
-			this.addEventListener(Event.ENTER_FRAME, this.noise);
+			this.addEventListener(Event.ENTER_FRAME, Main.noise(this));
 
 			// what had to be pressed?
 			var correct:Shape = new Shape;
@@ -286,7 +266,7 @@ package de.eiszfuchs.game.arrowmania {
 		private function kill():void {
 			Main.master.stage.removeEventListener(KeyboardEvent.KEY_DOWN, this.react);
 			this.removeEventListener(Event.ENTER_FRAME, this.updateTick);
-			this.removeEventListener(Event.ENTER_FRAME, this.noise);
+			this.removeEventListener(Event.ENTER_FRAME, Main.noise(this));
 
 			if (this.parent) {
 				this.parent.removeChild(this);

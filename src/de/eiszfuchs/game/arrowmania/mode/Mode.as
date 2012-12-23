@@ -74,7 +74,12 @@ package de.eiszfuchs.game.arrowmania.mode {
 				// urlLoader.addEventListener(HTTPStatusEvent.HTTP_STATUS, httpStatusHandler, false, 0, true);
 				// urlLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler, false, 0, true);
 				// urlLoader.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler, false, 0, true);
+
+			try {
 				urlLoader.load(request);
+			} catch (ex:Error) {
+				// nop
+			}
 
 		}
 
