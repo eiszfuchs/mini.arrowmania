@@ -74,7 +74,7 @@ package de.eiszfuchs.game.arrowmania {
 
 			this.points = 0;
 			this.arrows = new Array;
-			this.emitCount = this.arrows.length;
+			this.emitCount = this.mode.skipArrows;
 
 			this.addEventListener(Event.ENTER_FRAME, this.update);
 			this.addEventListener(Event.ENTER_FRAME, this.updateTick);

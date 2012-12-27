@@ -19,6 +19,7 @@ package de.eiszfuchs.game.arrowmania.mode {
 		public var speedStep:Number;
 		public var speedIncrease:int;
 
+		public var skipArrows:int;
 		public var highscore:int = 0;
 
 		protected var identifier:String;
@@ -29,6 +30,7 @@ package de.eiszfuchs.game.arrowmania.mode {
 			speed = 1;
 			speedStep = 0.05;
 			speedIncrease = 15;
+			skipArrows = 0;
 		}
 
 		public function emit(index:int = 0):Arrow {

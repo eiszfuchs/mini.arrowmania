@@ -10,9 +10,7 @@ package de.eiszfuchs.game.arrowmania.mode {
 		public function Kickstart():void {
 			super();
 
-			this.speed = 1.9;
-			this.tickLength = 40;
-			speedIncrease = 10;
+			this.skipArrows = 450;
 
 			this.identifier = "Kickstart";
 		}
