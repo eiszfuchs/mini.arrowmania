@@ -32,7 +32,7 @@ package de.eiszfuchs.game.arrowmania {
 			logoField.text = "Arrow Mania III";
 
 			logoField.x = (150 - logoField.width) / 2;
-			logoField.y = 5;
+			logoField.y = 8;
 
 			addChild(logoField);
 

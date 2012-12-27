@@ -12,8 +12,8 @@ package de.eiszfuchs.game.arrowmania.mode {
 
 			this.speed = 4;
 			this.tickLength = 22;
-			speedIncrease = 6;
-			tickDecrease = 6;
+			this.speedIncrease = 6;
+			this.tickDecrease = 6;
 
 			this.identifier = "Extreme";
 		}

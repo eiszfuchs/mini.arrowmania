@@ -25,16 +25,19 @@ package de.eiszfuchs.game.arrowmania.mode {
 		protected var identifier:String;
 
 		public function Mode():void {
-			tickLength = 60;
-			tickDecrease = 10;
-			speed = 1;
-			speedStep = 0.05;
-			speedIncrease = 15;
-			skipArrows = 0;
+			this.tickLength = 60;
+			this.tickDecrease = 10;
+
+			this.speed = 1;
+			this.speedStep = 0.05;
+			this.speedIncrease = 15;
+
+			this.skipArrows = 0;
 		}
 
 		public function emit(index:int = 0):Arrow {
 			var dir:int = this.randomDirection();
+
 			return new Arrow(dir, dir, dir, this.randomColor(), true);
 		}
 

@@ -62,7 +62,7 @@ package de.eiszfuchs.game.arrowmania {
 
 			this.tick = 1;
 			this.tickLengthBase = this.mode.tickLength;
-			this.tickLengthMin = 4;
+			this.tickLengthMin = 2;
 			this.tickLength = this.tickLengthBase;
 			this.tickStep = 1;
 			this.tickDecrease = this.mode.tickDecrease;

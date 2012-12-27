@@ -12,8 +12,8 @@ package de.eiszfuchs.game.arrowmania.mode {
 
 			this.speed = 3;
 			this.tickLength = 24;
-			speedIncrease = 8;
-			tickDecrease = 8;
+			this.speedIncrease = 8;
+			this.tickDecrease = 8;
 
 			this.identifier = "Ultra";
 		}

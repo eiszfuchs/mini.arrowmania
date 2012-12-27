@@ -15,9 +15,14 @@ package de.eiszfuchs.game.arrowmania.mode {
 
 		override public function emit(index:int = 0):Arrow {
 			var offset:int = this.randomIndex();
+
+			var position:int = this.getDirection(offset);
 			var direction:int = this.getDirection(offset);
+			var target:int = this.getDirection(offset);
 			var color:uint = this.getColor(offset);
-			return new Arrow(direction, direction, direction, color, false);
+			var flashing:Boolean = false;
+
+			return new Arrow(position, direction, target, color, flashing);
 		}
 	}
 }
