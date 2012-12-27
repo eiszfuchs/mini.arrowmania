@@ -118,11 +118,20 @@ package de.eiszfuchs.game.arrowmania {
 			// bounds
 			g = this.graphics;
 			g.clear();
+			g.lineStyle();
+
 			g.beginFill(SLOT);
 			g.drawRect(10, this.mode.catchBelow, 130, 1);
+			g.moveTo(15, this.mode.catchBelow - 1);
+			g.lineTo(20, this.mode.catchBelow - 7);
+			g.lineTo(10, this.mode.catchBelow - 7);
 			g.endFill();
+
 			g.beginFill(SLOT);
 			g.drawRect(10, this.mode.catchAbove, 130, 1);
+			g.moveTo(15, this.mode.catchAbove + 1);
+			g.lineTo(20, this.mode.catchAbove + 7);
+			g.lineTo(10, this.mode.catchAbove + 7);
 			g.endFill();
 		}
 

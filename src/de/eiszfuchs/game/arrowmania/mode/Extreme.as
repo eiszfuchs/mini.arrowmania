@@ -18,7 +18,7 @@ package de.eiszfuchs.game.arrowmania.mode {
 			this.tickDecrease = 6;
 
 			// don't be lazy
-			this.catchBelow = 10;
+			this.catchBelow = 20;
 
 			this.identifier = "Extreme";
 		}
