@@ -3,12 +3,14 @@ package de.eiszfuchs.game.arrowmania {
 	import flash.events.Event;
 	import flash.display.Sprite;
 	import flash.filters.BlurFilter;
+	import flash.filters.ShaderFilter;
 
 	/**
 	 * @author eiszfuchs
 	 */
 	public class Noisy extends Sprite {
 
+		[Embed(source="/src/de/eiszfuchs/shader/shift.pbj", mimeType="application/octet-stream")] var NOISESHADER:Class;
 		public function Noisy():void {
 			super();
 		}
@@ -21,6 +23,8 @@ package de.eiszfuchs.game.arrowmania {
 			this.removeEventListener(Event.ENTER_FRAME, this.noise);
 		}
 
+		private var displacedY:int = 0;
+
 		private function noise(event:Event = null):void {
 			if (Math.random() > 0.9) {
 				this.x = Math.random() * 10 - 5;
@@ -28,14 +32,20 @@ package de.eiszfuchs.game.arrowmania {
 				this.x = 0;
 			}
 
-			if (Math.random() > 0.95) {
-				this.y = Math.random() * 40 - 20;
+			if (this.displacedY <= 0) {
+				if (Math.random() > 0.95) {
+					this.y = Math.random() * 20 - 10;
+					this.displacedY = Math.floor(Math.random() * 10);
+				} else {
+					this.y = 0;
+				}
 			} else {
-				this.y = 0;
+				this.displacedY -= 1;
 			}
 
 			this.filters = [
-				new BlurFilter(Math.random() * 10, 0, 2)
+				new BlurFilter(Math.random() * 10, 0, 2),
+				new ShaderFilter(myShader)
 			];
 		}
 	}
