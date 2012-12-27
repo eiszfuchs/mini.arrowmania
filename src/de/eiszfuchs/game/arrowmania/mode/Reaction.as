@@ -15,8 +15,6 @@ package de.eiszfuchs.game.arrowmania.mode {
 
 		override public function emit(index:int = 0):Arrow {
 			// TODO: stub
-
-			// TODO: catch arrows in a particular area
 		}
 	}
 }

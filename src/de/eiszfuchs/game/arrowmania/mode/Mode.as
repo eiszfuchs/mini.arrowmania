@@ -19,6 +19,9 @@ package de.eiszfuchs.game.arrowmania.mode {
 		public var speedStep:Number;
 		public var speedIncrease:int;
 
+		public var catchAbove:int;
+		public var catchBelow:int;
+
 		public var skipArrows:int;
 		public var highscore:int = 0;
 
@@ -32,6 +35,11 @@ package de.eiszfuchs.game.arrowmania.mode {
 			this.speedStep = 0.05;
 			this.speedIncrease = 15;
 
+			this.catchAbove = 420;
+			// I checked against Number.NEGATIVE_INFINITY before,
+			// but that failed in check()
+			this.catchBelow = -1000000000;
+
 			this.skipArrows = 0;
 		}
 
@@ -41,11 +49,17 @@ package de.eiszfuchs.game.arrowmania.mode {
 			return new Arrow(dir, dir, dir, this.randomColor(), true);
 		}
 
-		public function check(arrows:Array, pressed:int):Object {
+		public function check(arrows:Array, pressed:int = -1):Object {
 			var arrow:Arrow = arrows[0];
 			var key:int = arrow.getDirection();
 
-			return this.checkResponse(key, key === pressed, 0, 1);
+			var inBounds:Boolean = arrow.y >= this.catchBelow && arrow.y <= this.catchAbove;
+
+			if (pressed < 0) {
+				return this.checkResponse(key, inBounds, 0, 0);
+			}
+
+			return this.checkResponse(key, key === pressed && inBounds, 0, 1);
 		}
 
 		private function checkResponse(key:int, correct:Boolean = false, killIndex:int = 0, killAmount:int = 0):Object {

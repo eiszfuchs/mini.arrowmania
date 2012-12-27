@@ -133,6 +133,14 @@ package de.eiszfuchs.game.arrowmania {
 				this.arrows[i].update(this.tick, this.tickLength);
 			}
 
+			var check:Object = this.mode.check(this.arrows);
+			if (!check.correct) {
+				this.death = check.key;
+				this.die();
+
+				return;
+			}
+
 			this.tickLength = this.tickLengthBase - this.tickStep * Math.floor(this.emitCount / this.tickDecrease);
 			this.tickLength = Math.max(this.tickLength, this.tickLengthMin);
 			this.speed = this.speedBase + this.speedStep * Math.floor(this.emitCount / this.speedIncrease);
