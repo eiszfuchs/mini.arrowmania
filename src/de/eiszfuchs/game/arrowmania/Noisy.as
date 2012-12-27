@@ -13,7 +13,15 @@ package de.eiszfuchs.game.arrowmania {
 			super();
 		}
 
-		protected function noise(event:Event = null):void {
+		protected function startNoise():void {
+			this.addEventListener(Event.ENTER_FRAME, this.noise);
+		}
+
+		protected function stopNoise():void {
+			this.removeEventListener(Event.ENTER_FRAME, this.noise);
+		}
+
+		private function noise(event:Event = null):void {
 			if (Math.random() > 0.9) {
 				this.x = Math.random() * 10 - 5;
 			} else {

@@ -234,8 +234,10 @@ package de.eiszfuchs.game.arrowmania {
 		 * color     - color
 		 * flashing  - flashes?
 		 */
-		private function emit():Arrow {
+		private function emit():void {
 			var arrow:Arrow = this.mode.emit(this.emitCount);
+
+			if (arrow === null) return;
 
 			arrow.y = this.stage.stageHeight - 30;
 			this.addChild(arrow);
@@ -243,8 +245,6 @@ package de.eiszfuchs.game.arrowmania {
 			this.arrows.push(arrow);
 
 			this.emitCount += 1;
-
-			return arrow;
 		}
 
 		private function die():void {
@@ -262,7 +262,7 @@ package de.eiszfuchs.game.arrowmania {
 
 			// this.rotation = 5;
 
-			this.addEventListener(Event.ENTER_FRAME, this.noise);
+			this.startNoise();
 
 			// what had to be pressed?
 			var correct:Shape = new Shape;
@@ -293,7 +293,7 @@ package de.eiszfuchs.game.arrowmania {
 		private function kill():void {
 			Main.master.stage.removeEventListener(KeyboardEvent.KEY_DOWN, this.react);
 			this.removeEventListener(Event.ENTER_FRAME, this.updateTick);
-			this.removeEventListener(Event.ENTER_FRAME, this.noise);
+			this.stopNoise();
 
 			if (this.parent) {
 				this.parent.removeChild(this);

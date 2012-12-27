@@ -32,7 +32,7 @@ package de.eiszfuchs.game.arrowmania {
 			this.descriptions = [
 				"Change your nickname (" + Settings.getSetting('player_nick', "Player") + ") for the high scores.",
 				"Normal: Hit the key in the direction of the arrows.",
-				"Kickstart: Like 'Normal', but will skip the first 400-500 arrows.",
+				"Kickstart: Like 'Normal', but will skip the first 450 arrows.",
 				"Ultra: Like 'Normal', but at WAY higher speed.",
 				"Extreme: Like 'Ultra', but at EVEN MORE higher speed. (may change)",
 				"Fooling: Like 'Normal', but sometimes arrows will come out of the wrong slot.",

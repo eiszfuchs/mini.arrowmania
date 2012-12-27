@@ -22,7 +22,7 @@ package de.eiszfuchs.game.arrowmania {
 		public function Nick():void {
 			this.init();
 
-			this.addEventListener(Event.ENTER_FRAME, this.noise);
+			this.startNoise();
 			Main.master.stage.addEventListener(KeyboardEvent.KEY_DOWN, this.react);
 		}
 
@@ -70,7 +70,7 @@ package de.eiszfuchs.game.arrowmania {
 		}
 
 		private function kill():void {
-			this.removeEventListener(Event.ENTER_FRAME, this.noise);
+			this.stopNoise();
 			Main.master.stage.removeEventListener(KeyboardEvent.KEY_DOWN, this.react);
 
 			if (this.parent) {

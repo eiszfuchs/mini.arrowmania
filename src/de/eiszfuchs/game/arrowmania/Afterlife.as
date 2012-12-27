@@ -18,7 +18,7 @@ package de.eiszfuchs.game.arrowmania {
 
 		public function Afterlife(message:String) {
 			this.addEventListener(Event.ENTER_FRAME, this.update);
-			// this.addEventListener(Event.ENTER_FRAME, Main.noise(this));
+			// this.startNoise();
 
 			draw(message);
 		}

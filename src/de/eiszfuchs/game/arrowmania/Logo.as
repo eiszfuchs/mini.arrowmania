@@ -36,7 +36,7 @@ package de.eiszfuchs.game.arrowmania {
 
 			addChild(logoField);
 
-			this.addEventListener(Event.ENTER_FRAME, this.noise);
+			this.startNoise();
 		}
 	}
 }
