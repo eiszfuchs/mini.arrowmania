@@ -12,7 +12,11 @@ package de.eiszfuchs.game.arrowmania.mode {
 			super();
 
 			this.speed = 0.5;
+			this.speedStep = 0.1;
+			this.speedIncrease = 6;
+
 			this.tickLength = 100;
+			this.tickDecrease = 10;
 
 			this.identifier = "Crazy";
 		}

@@ -10,11 +10,16 @@ package de.eiszfuchs.game.arrowmania.mode {
 		public function Nostalgic():void {
 			super();
 
-			this.identifier = "Nostalgic";
-		}
+			this.tickLength = 40;
+			this.speed = 1.4;
 
-		override public function emit(index:int = 0):Arrow {
-			// TODO: stub
+			this.tickStep = 0;
+			this.speedStep = 0;
+
+			this.catchAbove = 40;
+			this.catchBelow = 20;
+
+			this.identifier = "Nostalgic";
 		}
 	}
 }

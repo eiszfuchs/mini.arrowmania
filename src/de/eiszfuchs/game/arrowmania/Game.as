@@ -64,7 +64,7 @@ package de.eiszfuchs.game.arrowmania {
 			this.tickLengthBase = this.mode.tickLength;
 			this.tickLengthMin = 2;
 			this.tickLength = this.tickLengthBase;
-			this.tickStep = 1;
+			this.tickStep = this.mode.tickStep;
 			this.tickDecrease = this.mode.tickDecrease;
 
 			this.speedBase = this.mode.speed;
@@ -114,6 +114,16 @@ package de.eiszfuchs.game.arrowmania {
 				Arrow.rotate(slotShape, i);
 				this.addChild(slotShape);
 			}
+
+			// bounds
+			g = this.graphics;
+			g.clear();
+			g.beginFill(SLOT);
+			g.drawRect(10, this.mode.catchBelow, 130, 1);
+			g.endFill();
+			g.beginFill(SLOT);
+			g.drawRect(10, this.mode.catchAbove, 130, 1);
+			g.endFill();
 		}
 
 		private function updateTick(event:Event = null):void {
@@ -143,7 +153,7 @@ package de.eiszfuchs.game.arrowmania {
 
 			this.tickLength = this.tickLengthBase - this.tickStep * Math.floor(this.emitCount / this.tickDecrease);
 			this.tickLength = Math.max(this.tickLength, this.tickLengthMin);
-			this.speed = this.speedBase + this.speedStep * Math.floor(this.emitCount / this.speedIncrease);
+			this.speed = this.speedBase + this.speedStep * Math.floor(Math.pow(this.emitCount, this.mode.speedIncreasePower) / this.speedIncrease);
 
 			// clean up numbers
 			this.tickLength = Math.round(this.tickLength * 100) / 100;

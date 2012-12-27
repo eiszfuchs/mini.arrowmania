@@ -64,6 +64,12 @@ package de.eiszfuchs.game.arrowmania {
 			Arrow.shape(g);
 			g.endFill();
 
+			if (this.flashing) {
+				g.beginFill(Game.WHITE);
+				Arrow.shape(g, 5);
+				g.endFill();
+			}
+
 			Arrow.rotate(this, this.direction);
 		}
 

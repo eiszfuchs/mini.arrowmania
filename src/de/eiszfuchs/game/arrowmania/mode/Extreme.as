@@ -12,12 +12,13 @@ package de.eiszfuchs.game.arrowmania.mode {
 
 			this.speed = 4;
 			this.speedIncrease = 6;
+			this.speedIncreasePower = 1;
 
 			this.tickLength = 22;
 			this.tickDecrease = 6;
 
 			// don't be lazy
-			this.catchBelow = 0;
+			this.catchBelow = 10;
 
 			this.identifier = "Extreme";
 		}

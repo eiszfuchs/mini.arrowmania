@@ -13,11 +13,13 @@ package de.eiszfuchs.game.arrowmania.mode {
 	public class Mode {
 
 		public var tickLength:int;
+		public var tickStep:int;
 		public var tickDecrease:int;
 
 		public var speed:Number;
 		public var speedStep:Number;
 		public var speedIncrease:int;
+		public var speedIncreasePower:int;
 
 		public var catchAbove:int;
 		public var catchBelow:int;
@@ -29,11 +31,13 @@ package de.eiszfuchs.game.arrowmania.mode {
 
 		public function Mode():void {
 			this.tickLength = 60;
+			this.tickStep = 1;
 			this.tickDecrease = 10;
 
 			this.speed = 1;
 			this.speedStep = 0.05;
 			this.speedIncrease = 15;
+			this.speedIncreasePower = 1;
 
 			this.catchAbove = 420;
 			// I checked against Number.NEGATIVE_INFINITY before,
@@ -46,18 +50,18 @@ package de.eiszfuchs.game.arrowmania.mode {
 		public function emit(index:int = 0):Arrow {
 			var dir:int = this.randomDirection();
 
-			return new Arrow(dir, dir, dir, this.randomColor(), true);
+			return new Arrow(dir, dir, dir, this.randomColor(), false);
 		}
 
 		public function check(arrows:Array, pressed:int = -1):Object {
 			var arrow:Arrow = arrows[0];
 			var key:int = arrow.getDirection();
 
-			var inBounds:Boolean = arrow.y >= this.catchBelow && arrow.y <= this.catchAbove;
-
 			if (pressed < 0) {
-				return this.checkResponse(key, inBounds, 0, 0);
+				return this.checkResponse(key, arrow.y > this.catchBelow, 0, 0);
 			}
+
+			var inBounds:Boolean = arrow.y > this.catchBelow && arrow.y <= this.catchAbove;
 
 			return this.checkResponse(key, key === pressed && inBounds, 0, 1);
 		}

@@ -27,8 +27,8 @@ package de.eiszfuchs.game.arrowmania {
 		private var select:int = 0;
 
 		public function Menu():void {
-			this.classes = [Nick, Normal, Kickstart, Ultra, Extreme, Fooling, Crazy, Attention, Rotate];
-			this.labels = ["Change nick", "Normal", "Kickstart", "Ultra", "Extreme", "Fooling", "Crazy", "Attention", "Rotate"];
+			this.classes = [Nick, Normal, Kickstart, Ultra, Extreme, Fooling, Crazy, Attention, Rotate, Nostalgic];
+			this.labels = ["Change nick", "Normal", "Kickstart", "Ultra", "Extreme", "Fooling", "Crazy", "Attention", "Rotate", "Nostalgic"];
 			this.descriptions = [
 				"Change your nickname (" + Settings.getSetting('player_nick', "Player") + ") for the high scores.",
 				"Normal: Hit the key in the direction of the arrows.",
@@ -38,7 +38,8 @@ package de.eiszfuchs.game.arrowmania {
 				"Fooling: Like 'Normal', but sometimes arrows will come out of the wrong slot.",
 				"Crazy: Arrows will appear in blue (press direction of slot) and red (press direction of arrow). If flashing, hit the opposite key.",
 				"Attention: If flashing, press direction of slot, otherwise direction of arrow.",
-				"Rotate: Press the direction of the arrow, rotated one step clockwise. If flashing, rotate counter-clockwise."
+				"Rotate: Press the direction of the arrow, rotated one step clockwise. If flashing, rotate counter-clockwise.",
+				"Nostalgic: Catch them if you can."
 			];
 
 			this.live();
@@ -81,7 +82,7 @@ package de.eiszfuchs.game.arrowmania {
 			selectFormat = new TextFormat;
 			selectFormat.font = "News Cycle Bold";
 			selectFormat.size = 14;
-			selectFormat.leading = -3;
+			selectFormat.leading = -4;
 			selectField = new TextField;
 			selectField.type = TextFieldType.DYNAMIC;
 			selectField.textColor = Game.SLOT;
@@ -121,7 +122,7 @@ package de.eiszfuchs.game.arrowmania {
 			this.descriptionField.width = 130;
 
 			this.descriptionField.x = 10;
-			this.descriptionField.y = 70 + i * 24;
+			this.descriptionField.y = 60 + i * 24;
 
 			this.addChild(this.descriptionField);
 
