@@ -5,9 +5,6 @@ package de.eiszfuchs.game.arrowmania {
 	import flash.events.*;
 	import flash.ui.Keyboard;
 
-	import flash.utils.Dictionary;
-	import flash.filters.*;
-
 	import de.eiszfuchs.utils.*;
 
 	/**
@@ -48,36 +45,6 @@ package de.eiszfuchs.game.arrowmania {
 			this.graphics.endFill();
 
 			this.addChild(new Menu);
-		}
-
-		public static var noiseDict:Dictionary = new Dictionary();
-		public static function noise(canvas:DisplayObject):Function {
-			var func:Function;
-			if (Main.noiseDict[canvas]) {
-				func = Main.noiseDict[canvas];
-				delete Main.noiseDict[canvas];
-				return func;
-			}
-
-			Main.noiseDict[canvas] = function(event:Event = null):void {
-				if (Math.random() > 0.9) {
-					canvas.x = Math.random() * 10 - 5;
-				} else {
-					canvas.x = 0;
-				}
-
-				if (Math.random() > 0.95) {
-					canvas.y = Math.random() * 40 - 20;
-				} else {
-					canvas.y = 0;
-				}
-
-				canvas.filters = [
-					new BlurFilter(Math.random() * 10, 0, 2)
-				];
-			};
-
-			return Main.noiseDict[canvas];
 		}
 	}
 }

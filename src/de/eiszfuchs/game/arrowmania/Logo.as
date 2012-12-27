@@ -12,7 +12,7 @@ package de.eiszfuchs.game.arrowmania {
 	/**
 	 * @author eiszfuchs
 	 */
-	public class Logo extends Sprite {
+	public class Logo extends Noisy {
 
 		public function Logo():void {
 			var logoFormat:TextFormat;
@@ -36,7 +36,7 @@ package de.eiszfuchs.game.arrowmania {
 
 			addChild(logoField);
 
-			this.addEventListener(Event.ENTER_FRAME, Main.noise(this));
+			this.addEventListener(Event.ENTER_FRAME, this.noise);
 		}
 	}
 }

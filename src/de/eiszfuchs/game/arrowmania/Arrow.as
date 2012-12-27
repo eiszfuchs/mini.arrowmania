@@ -31,12 +31,12 @@ package de.eiszfuchs.game.arrowmania {
 			this.draw();
 		}
 
-		public static function shape(g:Graphics, shiftX:int = 0, shiftY:int = 0):void {
-			g.moveTo(shiftX + 0,   shiftY + -10);
-			g.lineTo(shiftX + -10, shiftY + 10);
-			g.lineTo(shiftX + 0,   shiftY + 5);
-			g.lineTo(shiftX + 10,  shiftY + 10);
-			g.lineTo(shiftX + 0,   shiftY + -10);
+		public static function shape(g:Graphics, size:int = 10, shiftX:int = 0, shiftY:int = 0):void {
+			g.moveTo(shiftX + 0,     shiftY + -size);
+			g.lineTo(shiftX + -size, shiftY + size);
+			g.lineTo(shiftX + 0,     shiftY + (size / 2));
+			g.lineTo(shiftX + size,  shiftY + size);
+			g.lineTo(shiftX + 0,     shiftY + -size);
 		}
 
 		public static function rotate(d:DisplayObject, direction:int):void {

@@ -17,7 +17,7 @@ package de.eiszfuchs.game.arrowmania {
 	/**
 	 * @author eiszfuchs
 	 */
-	public class Game extends Sprite {
+	public class Game extends Noisy {
 
 		private var points:int;
 		private var emitCount:int;
@@ -235,7 +235,7 @@ package de.eiszfuchs.game.arrowmania {
 
 			// this.rotation = 5;
 
-			this.addEventListener(Event.ENTER_FRAME, Main.noise(this));
+			this.addEventListener(Event.ENTER_FRAME, this.noise);
 
 			// what had to be pressed?
 			var correct:Shape = new Shape;
@@ -266,7 +266,7 @@ package de.eiszfuchs.game.arrowmania {
 		private function kill():void {
 			Main.master.stage.removeEventListener(KeyboardEvent.KEY_DOWN, this.react);
 			this.removeEventListener(Event.ENTER_FRAME, this.updateTick);
-			this.removeEventListener(Event.ENTER_FRAME, Main.noise(this));
+			this.removeEventListener(Event.ENTER_FRAME, this.noise);
 
 			if (this.parent) {
 				this.parent.removeChild(this);
