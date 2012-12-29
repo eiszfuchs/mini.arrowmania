@@ -1,0 +1,67 @@
+<languageVersion : 1.0;>
+
+kernel noise
+    <
+        namespace : "de.eiszfuchs.shader";
+        vendor : "eiszfuchs";
+        version : 0;
+    > {
+
+    input image4 src;
+    output pixel4 dst;
+    
+    parameter int redShiftX
+    <
+        minValue: -20;
+        maxValue: +20;
+        defaultValue: 0;
+    >;
+    
+    parameter int redShiftY
+    <
+        minValue: -20;
+        maxValue: +20;
+        defaultValue: 0;
+    >;
+    
+    parameter int greenShiftX
+    <
+        minValue: -20;
+        maxValue: +20;
+        defaultValue: 0;
+    >;
+    
+    parameter int greenShiftY
+    <
+        minValue: -20;
+        maxValue: +20;
+        defaultValue: 0;
+    >;
+    
+    parameter int blueShiftX
+    <
+        minValue: -20;
+        maxValue: +20;
+        defaultValue: 0;
+    >;
+    
+    parameter int blueShiftY
+    <
+        minValue: -20;
+        maxValue: +20;
+        defaultValue: 0;
+    >;
+
+    void
+    evaluatePixel() {
+        // dst = sampleNearest(src, outCoord());
+        
+        float4 pixelRed = sampleNearest(src, outCoord() + float2(redShiftX, redShiftY));
+        float4 pixelGreen = sampleNearest(src, outCoord() + float2(greenShiftX, greenShiftY));
+        float4 pixelBlue = sampleNearest(src, outCoord() + float2(blueShiftX, blueShiftY));
+        
+        float alpha = (pixelRed.a + pixelGreen.a + pixelBlue.a) / 3.0;
+        
+        dst = pixel4(pixelRed.r, pixelGreen.g, pixelBlue.b, alpha);
+    }
+}
