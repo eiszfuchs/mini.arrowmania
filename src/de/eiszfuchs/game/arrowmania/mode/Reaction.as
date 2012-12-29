@@ -11,7 +11,7 @@ package de.eiszfuchs.game.arrowmania.mode {
 			super();
 
 			this.tickLength = 8;
-			this.speed = 4;
+			this.speed = 12;
 
 			this.tickStep = 0;
 			this.speedStep = 0;
@@ -23,7 +23,7 @@ package de.eiszfuchs.game.arrowmania.mode {
 		}
 
 		override public function emit(index:int = 0):Arrow {
-			if (Math.random() > 0.8) return null;
+			if (Math.random() > 0.1) return null;
 
 			var offset:int = this.randomIndex();
 

@@ -27,8 +27,8 @@ package de.eiszfuchs.game.arrowmania {
 		private var select:int = 0;
 
 		public function Menu():void {
-			this.classes = [Nick, Normal, Kickstart, Ultra, Extreme, Fooling, Crazy, Attention, Rotate, Nostalgic];
-			this.labels = ["Change nick", "Normal", "Kickstart", "Ultra", "Extreme", "Fooling", "Crazy", "Attention", "Rotate", "Nostalgic"];
+			this.classes = [Nick, Normal, Kickstart, Ultra, Extreme, Fooling, Crazy, Attention, Rotate, Nostalgic, Reaction];
+			this.labels = ["Change nick", "Normal", "Kickstart", "Ultra", "Extreme", "Fooling", "Crazy", "Attention", "Rotate", "Nostalgic", "Reaction"];
 			this.descriptions = [
 				"Change your nickname (" + Settings.getSetting('player_nick', "Player") + ") for the high scores.",
 				"Normal: Hit the key in the direction of the arrows.",
@@ -39,7 +39,8 @@ package de.eiszfuchs.game.arrowmania {
 				"Crazy: Arrows will appear in blue (press direction of slot) and red (press direction of arrow). If flashing, hit the opposite key.",
 				"Attention: If flashing, press direction of slot, otherwise direction of arrow.",
 				"Rotate: Press the direction of the arrow, rotated one step clockwise. If flashing, rotate counter-clockwise.",
-				"Nostalgic: Catch them if you can."
+				"Nostalgic: Catch them if you can.",
+				"Reaction: Be quick."
 			];
 
 			this.live();
