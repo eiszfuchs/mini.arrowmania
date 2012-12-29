@@ -12,13 +12,17 @@ package de.eiszfuchs.game.arrowmania {
 	/**
 	 * @author eiszfuchs
 	 */
-	public class Afterlife extends Sprite {
+	public class Afterlife extends Noisy {
 
 		private var tick:int = 0;
 
-		public function Afterlife(message:String) {
+		public function Afterlife(message:String, x:int, y:int) {
 			this.addEventListener(Event.ENTER_FRAME, this.update);
-			// this.startNoise();
+
+			this.x = x;
+			this.y = y;
+
+			this.startNoise();
 
 			draw(message);
 		}
@@ -49,7 +53,7 @@ package de.eiszfuchs.game.arrowmania {
 			var fadeLength:int = 35;
 
 			this.tick += 1;
-			this.y -= 0.5;
+			this.rotation -= 0.5;
 
 			this.alpha = (fadeLength - tick) / fadeLength;
 
@@ -60,7 +64,6 @@ package de.eiszfuchs.game.arrowmania {
 
 		private function die():void {
 			this.removeEventListener(Event.ENTER_FRAME, this.update);
-			// this.removeEventListener(Event.ENTER_FRAME, Main.noise(this));
 			this.parent.removeChild(this);
 		}
 	}

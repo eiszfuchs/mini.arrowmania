@@ -16,11 +16,17 @@ package de.eiszfuchs.game.arrowmania {
 			super();
 		}
 
+		private var startX:Number = 0;
+		private var startY:Number = 0;
+
 		protected var blurFilter:BlurFilter;
 		protected var shaderFilter:ShaderFilter;
 		protected var shaderFilterShader:Shader;
 
 		protected function startNoise():void {
+			this.startX = this.x;
+			this.startY = this.y;
+
 			this.shaderFilterShader = new Shader(new NOISESHADER());
 
 			this.blurFilter = new BlurFilter(0, 0, 2);
@@ -40,15 +46,15 @@ package de.eiszfuchs.game.arrowmania {
 			// random offset
 
 			if (Math.random() > 0.9) {
-				this.x = Math.random() * 10 - 5;
+				this.x = this.startX + Math.random() * 10 - 5;
 			} else {
-				this.x = 0;
+				this.x = this.startX;
 			}
 
 			if (this.displacedY <= 0) {
 				if (Math.random() > 0.95) {
-					this.y = Math.random() * 20 - 10;
-					this.displacedY = Math.floor(Math.random() * 10);
+					this.y = this.startY + Math.random() * 20 - 10;
+					this.displacedY = Math.floor(Math.random() * 20);
 
 					this.blurFilter.blurX = 0;
 
@@ -56,7 +62,7 @@ package de.eiszfuchs.game.arrowmania {
 					this.shaderFilter.shader.data.greenShiftX.value = [Math.floor(Math.random() * 10 - 5)];
 					this.shaderFilter.shader.data.blueShiftX.value = [Math.floor(Math.random() * 10 - 5)];
 				} else {
-					this.y = 0;
+					this.y = this.startY;
 
 					this.blurFilter.blurX = Math.random() * 10;
 

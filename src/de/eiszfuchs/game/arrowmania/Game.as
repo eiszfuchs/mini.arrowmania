@@ -262,8 +262,6 @@ package de.eiszfuchs.game.arrowmania {
 
 			// this.rotation = 5;
 
-			this.startNoise();
-
 			// what had to be pressed?
 			var correct:Shape = new Shape;
 
@@ -283,6 +281,8 @@ package de.eiszfuchs.game.arrowmania {
 			// end of game
 
 			this.died = true;
+
+			this.startNoise();
 		}
 
 		private function restart():void {

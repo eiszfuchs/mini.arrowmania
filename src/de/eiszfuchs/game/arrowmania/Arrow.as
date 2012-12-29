@@ -95,9 +95,7 @@ package de.eiszfuchs.game.arrowmania {
 
 		public function kill(gravestone:String = ""):void {
 			if (gravestone.length > 0) {
-				var death:Afterlife = new Afterlife(gravestone);
-				death.x = this.x;
-				death.y = this.y;
+				var death:Afterlife = new Afterlife(gravestone, this.x, this.y);
 				this.parent.addChild(death);
 			}
 
