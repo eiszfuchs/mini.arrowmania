@@ -11,7 +11,7 @@ package de.eiszfuchs.game.arrowmania {
 	 */
 	public class Noisy extends Sprite {
 
-		[Embed(source="/de/eiszfuchs/shader/noise.pbj", mimeType="application/octet-stream")] public var NOISESHADER:Class;
+		[Embed(source="/de/eiszfuchs/shader/noise.pbj", mimeType="application/octet-stream")] public static var NOISESHADER:Class;
 		public function Noisy():void {
 			super();
 		}
@@ -27,9 +27,11 @@ package de.eiszfuchs.game.arrowmania {
 			this.startX = this.x;
 			this.startY = this.y;
 
-			this.shaderFilterShader = new Shader(new NOISESHADER());
+			this.cacheAsBitmap = true;
 
-			this.blurFilter = new BlurFilter(0, 0, 2);
+			this.shaderFilterShader = new Shader(new Noisy.NOISESHADER());
+
+			this.blurFilter = new BlurFilter(0, 0, 3);
 			this.shaderFilter = new ShaderFilter(this.shaderFilterShader);
 
 			this.addEventListener(Event.ENTER_FRAME, this.noise);
@@ -44,7 +46,6 @@ package de.eiszfuchs.game.arrowmania {
 
 		protected function noise(event:Event = null):void {
 			// random offset
-
 			if (Math.random() > 0.9) {
 				this.x = this.startX + Math.random() * 10 - 5;
 			} else {
@@ -56,7 +57,9 @@ package de.eiszfuchs.game.arrowmania {
 					this.y = this.startY + Math.random() * 20 - 10;
 					this.displacedY = Math.floor(Math.random() * 20);
 
+					// special effects
 					this.blurFilter.blurX = 0;
+					this.blurFilter.blurY = Math.random() * 5;
 
 					this.shaderFilter.shader.data.redShiftX.value = [Math.floor(Math.random() * 10 - 5)];
 					this.shaderFilter.shader.data.greenShiftX.value = [Math.floor(Math.random() * 10 - 5)];
@@ -64,7 +67,9 @@ package de.eiszfuchs.game.arrowmania {
 				} else {
 					this.y = this.startY;
 
+					// special effects
 					this.blurFilter.blurX = Math.random() * 10;
+					this.blurFilter.blurY = 0;
 
 					this.shaderFilter.shader.data.redShiftX.value =
 						this.shaderFilter.shader.data.greenShiftX.value =
@@ -74,9 +79,10 @@ package de.eiszfuchs.game.arrowmania {
 				this.displacedY -= 1;
 			}
 
+			// special effects
 			this.filters = [
-				this.blurFilter,
-				this.shaderFilter
+				this.shaderFilter,
+				this.blurFilter
 			];
 		}
 	}

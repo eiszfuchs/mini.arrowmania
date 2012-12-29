@@ -18,7 +18,7 @@ package de.eiszfuchs.game.arrowmania {
 	/**
 	 * @author eiszfuchs
 	 */
-	public class Menu extends Sprite {
+	public class Menu extends Noisy {
 
 		private var classes:Array = new Array;
 		private var labels:Array = new Array;

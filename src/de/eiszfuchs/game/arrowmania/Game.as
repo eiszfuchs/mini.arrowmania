@@ -120,19 +120,23 @@ package de.eiszfuchs.game.arrowmania {
 			g.clear();
 			g.lineStyle();
 
-			g.beginFill(SLOT);
-			g.drawRect(10, this.mode.catchBelow, 130, 1);
-			g.moveTo(15, this.mode.catchBelow - 1);
-			g.lineTo(20, this.mode.catchBelow - 7);
-			g.lineTo(10, this.mode.catchBelow - 7);
-			g.endFill();
+			if (this.mode.catchBelow >= 0) {
+				g.beginFill(SLOT);
+				g.drawRect(10, this.mode.catchBelow, 130, 1);
+				g.moveTo(15, this.mode.catchBelow - 1);
+				g.lineTo(20, this.mode.catchBelow - 7);
+				g.lineTo(10, this.mode.catchBelow - 7);
+				g.endFill();
+			}
 
-			g.beginFill(SLOT);
-			g.drawRect(10, this.mode.catchAbove, 130, 1);
-			g.moveTo(15, this.mode.catchAbove + 1);
-			g.lineTo(20, this.mode.catchAbove + 7);
-			g.lineTo(10, this.mode.catchAbove + 7);
-			g.endFill();
+			if (this.mode.catchAbove < 420) {
+				g.beginFill(SLOT);
+				g.drawRect(10, this.mode.catchAbove, 130, 1);
+				g.moveTo(15, this.mode.catchAbove + 1);
+				g.lineTo(20, this.mode.catchAbove + 7);
+				g.lineTo(10, this.mode.catchAbove + 7);
+				g.endFill();
+			}
 		}
 
 		private function updateTick(event:Event = null):void {
@@ -152,12 +156,14 @@ package de.eiszfuchs.game.arrowmania {
 				this.arrows[i].update(this.tick, this.tickLength);
 			}
 
-			var check:Object = this.mode.check(this.arrows);
-			if (!check.correct) {
-				this.death = check.key;
-				this.die();
+			if (this.arrows.length > 0) {
+				var check:Object = this.mode.check(this.arrows);
+				if (!check.correct) {
+					this.death = check.key;
+					this.die();
 
-				return;
+					return;
+				}
 			}
 
 			this.tickLength = this.tickLengthBase - this.tickStep * Math.floor(this.emitCount / this.tickDecrease);
