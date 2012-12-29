@@ -120,6 +120,11 @@ package de.eiszfuchs.game.arrowmania {
 			g.clear();
 			g.lineStyle();
 
+			// basically, the problem here was that the clip
+			// was way too high for the filters to be
+			// rendered - so we only draw the bounds if they
+			// are needed
+
 			if (this.mode.catchBelow >= 0) {
 				g.beginFill(SLOT);
 				g.drawRect(10, this.mode.catchBelow, 130, 1);
