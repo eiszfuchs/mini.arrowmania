@@ -23,8 +23,9 @@ package de.eiszfuchs.game.arrowmania {
 		private var classes:Array = new Array;
 		private var labels:Array = new Array;
 		private var descriptions:Array = new Array;
+		private var textFields:Array = new Array;
 
-		private var select:int = 0;
+		private var select:int = 1;
 
 		public function Menu():void {
 			this.classes = [Nick, Normal, Kickstart, Ultra, Extreme, Fooling, Crazy, Attention, Rotate, Nostalgic, Reaction];
@@ -42,6 +43,7 @@ package de.eiszfuchs.game.arrowmania {
 				"Nostalgic: Catch them if you can.",
 				"Reaction: Be quick."
 			];
+			this.textFields = new Array;
 
 			this.live();
 		}
@@ -112,9 +114,10 @@ package de.eiszfuchs.game.arrowmania {
 				}
 
 				selectField.x = 40;
-				selectField.y = 56 + i * 24;
 
 				this.addChild(selectField);
+
+				this.textFields.push(selectField);
 			}
 
 			this.descriptionField = this.createTextField();
@@ -123,7 +126,7 @@ package de.eiszfuchs.game.arrowmania {
 			this.descriptionField.width = 130;
 
 			this.descriptionField.x = 10;
-			this.descriptionField.y = 60 + i * 24;
+			this.descriptionField.y = 60 + 7 * 24;
 
 			this.addChild(this.descriptionField);
 
@@ -141,7 +144,12 @@ package de.eiszfuchs.game.arrowmania {
 
 		private function draw():void {
 			this.selectionArrow.x = 24;
-			this.selectionArrow.y = 70 + this.select * 24;
+			this.selectionArrow.y = 70 + 3 * 24;
+
+			for (var i:int = 0; i < this.textFields.length; i += 1) {
+				this.textFields[i].y = 56 + (3 - this.select + i) * 24;
+				this.textFields[i].alpha = 1 - Math.abs(i - this.select) / 4;
+			}
 
 			this.descriptionField.text = this.descriptions[this.select];
 		}
